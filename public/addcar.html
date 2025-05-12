@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="max-w-4xl max-sm:max-w-lg mx-auto font-[sans-serif] p-6">
+        <div class="text-center mb-12 sm:mb-16">
+            <h1 class="mb-4 text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">Rent Your Car</h1>
+        </div>
+  
+        <form>
+          <div class="grid sm:grid-cols-4 gap-6">
+            <div>
+              <label class="text-gray-600 text-sm mb-2 block">Company Name</label>
+              <input name="name" type="text" class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all" placeholder="Enter Company Name" />
+            </div>
+            <div>
+              <label class="text-gray-600 text-sm mb-2 block">Registration No.</label>
+              <input name="text" type="text" class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all" placeholder="Enter Registration No." />
+            </div>
+            <div>
+              <label class="text-gray-600 text-sm mb-2 block">Car Brand</label>
+              <input name="text" type="text" class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all" placeholder="Enter Car Brand" />
+            </div>
+            <div>
+              <label class="text-gray-600 text-sm mb-2 block">Car Model</label>
+              <input name="text" type="number" class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all" placeholder="Enter Car Model" />
+            </div>
+            <div>
+              <label class="text-gray-600 text-sm mb-2 block">Model Year</label>
+              <input name="number" type="text" class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all" placeholder="Model Year" />
+            </div>
+            <div>
+              <label class="text-gray-600 text-sm mb-2 block">Car Color</label>
+              <input name="text" type="text" class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all" placeholder="Enter Car Color" />
+            </div>
+            <div>
+              <label class="text-gray-600 text-sm mb-2 block">Vehicle Type</label>
+              <input name="text" type="text" class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all" placeholder="Enter Vehicle Type" />
+            </div>
+            <div>
+                <label class="text-gray-600 text-sm mb-2 block">No. of Seats</label>
+                <input name="number" type="number" class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all" placeholder="Enter No. of Seats" />
+            </div>
+            <div>
+              <label class="text-gray-600 text-sm mb-2 block">Engine No.</label>
+              <input name="number" type="text" class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all" placeholder="Enter Engine No." />
+            </div>
+            <div>
+              <label class="text-gray-600 text-sm mb-2 block">Chasis No.</label>
+              <input name="number" type="number" class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all" placeholder="Enter Chasis No." />
+            </div>
+            <div>
+              <label class="text-gray-600 text-sm mb-2 block">Engine Capacity</label>
+              <input name="text" type="text" class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all" placeholder="Enter Engine Capacity" />
+            </div>
+            <div>
+              <label class="text-gray-600 text-sm mb-2 block">Engine Type</label>
+              <input name="text" type="text" class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all" placeholder="Enter Engine Type" />
+            </div>
+            <div>
+              <label class="text-gray-600 text-sm mb-2 block">Insurance Policy Type</label>
+              <input name="text" type="text" class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all" placeholder="Enter Insurance Policy Type" />
+            </div>
+            <div>
+              <label class="text-gray-600 text-sm mb-2 block">Insurance Policy Number</label>
+              <input name="text" type="text" class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all" placeholder="Enter Insurance Policy Number" />
+            </div>
+            <div>
+              <label class="text-gray-600 text-sm mb-2 block">Policy Start Date</label>
+              <input datepicker id="default-datepicker" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select Policy Start Date">
+            </div>
+            <div>
+              <label class="text-gray-600 text-sm mb-2 block">Policy End Date</label>    
+              <input datepicker id="default-datepicker" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select Policy End Date">
+            </div>
+            <!-- Upload Images -->
+            <div class="sm:col-span-4">
+                <label for="uploadImages" class="text-gray-600 text-sm mb-2 block">Upload Images</label>
+                <input 
+                id="uploadImages" 
+                name="uploadImages" 
+                type="file" 
+                accept=".png, .jpg, .jpeg" 
+                multiple 
+                class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all cursor-pointer" 
+                onchange="previewImages(event)" 
+                />
+                <div id="imagePreviewContainer" class="mt-4 flex gap-4 flex-wrap bg-gray-100 p-4 border border-dashed border-gray-300 rounded-lg">
+                <span id="placeholderText" class="text-sm text-gray-500 w-full text-center">No images selected</span>
+                </div>
+
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <button type="button" class="mx-auto block py-3 px-7 text-md tracking-wider rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
+              Register Car
+            </button>
+          </div>
+        </form>
+      </div>
+
+      
+
+<script>
+    function previewImages(event) {
+  const input = event.target;
+  const previewContainer = document.getElementById('imagePreviewContainer');
+  const placeholderText = document.getElementById('placeholderText');
+
+  // Clear previous previews
+  previewContainer.innerHTML = '';
+
+  if (input.files && input.files.length > 0) {
+    placeholderText.classList.add('hidden'); // Hide placeholder
+
+    Array.from(input.files).forEach((file) => {
+      // Validate file type for specific image formats
+      if (file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/jpg') {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const imageWrapper = document.createElement('div');
+          imageWrapper.className = 'relative flex-shrink-0 w-32 h-32 overflow-hidden rounded-lg border border-gray-300 bg-white';
+
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.alt = 'Image Preview';
+          img.className = 'w-full h-full object-cover';
+
+          imageWrapper.appendChild(img);
+          previewContainer.appendChild(imageWrapper);
+        };
+        reader.readAsDataURL(file); // Read the image file
+      }
+    });
+  } else {
+    placeholderText.classList.remove('hidden'); // Show placeholder
+  }
+}
+
+</script>
+</body>
+</html>

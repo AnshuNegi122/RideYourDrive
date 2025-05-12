@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RideYourDrive</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+
+  <!-- Flatpickr Script -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
+  <style>
+    /* Marquee Animation */
+    @keyframes marquee {
+      0% {
+        transform: translateX(100%);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .marquee {
+      animation: marquee 20s linear infinite;
+    }
+
+
+    .marquee {
+      display: flex;
+      animation: marquee 30s linear infinite;
+    }
+
+
+    .scrolling-logos {
+      animation: scroll 30s linear infinite;
+    }
+
+    /* Custom styles for circular profile images */
+    .profile-images img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid #1a1a1a;
+    }
+
+    /* Custom styles for positioning the car images */
+    .card-bg {
+      background-size: contain;
+      background-position: right bottom;
+      background-repeat: no-repeat;
+    }
+
+    .scrolling-reviews {
+      display: flex;
+      animation: scroll 30s linear infinite;
+    }
+
+
+
+    /* CSS for smooth horizontal scrolling */
+    @keyframes scroll {
+      0% {
+        transform: translateX(100%);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .scrolling-reviews {
+      display: flex;
+      gap: 2rem;
+      animation: scroll 30s linear infinite;
+    }
+
+    /* Modal Hidden State */
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Modal Visible State */
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Modal Container Styling */
+#modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 50;
+}
+
+
+  </style>
+</head>
+
+<body class="bg-gray-800 text-white">
+
+
+  <!-- Navigation Bar -->
+  <header class="absolute top-0 left-0 w-full z-10 bg-transparent px-8 py-6 flex justify-between items-center">
+    <div class="text-lg font-semibold">RideYourDrive</div>
+    <nav class="space-x-8 hidden md:flex">
+      <a href="#" class="hover:text-gray-300 text-sm font-semibold leading-6">Product</a>
+      <a href="#" class="hover:text-gray-300 text-sm font-semibold leading-6">Features</a>
+      <a href="#" class="hover:text-gray-300 text-sm font-semibold leading-6">Marketplace</a>
+      <a href="#" class="hover:text-gray-300 text-sm font-semibold leading-6">Company</a>
+    </nav>
+    <a href="login.html" class="text-white hover:text-gray-300">Log in →</a>
+  </header>
+
+
+  <!-- Hero Section -->
+  <section class="relative h-screen flex items-center justify-start p-20 bg-cover bg-center"
+    style="background-image: url('img/main.png');">
+    <div class="absolute inset-0 bg-black opacity-60"></div>
+    <div class="relative max-w-3xl px-4">
+      <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">Looking for a vehicle?<br> You’re in the perfect
+        spot.</h1>
+      <a href="#"
+        class="inline-block bg-transparent border border-green-400 text-green-400 px-6 py-3 rounded-lg text-lg font-medium hover:bg-green-600 hover:text-white transition duration-300">Find
+        Your Perfect Car &rarr;</a>
+      <div class="flex justify-start space-x-6 m-5">
+        <div class="flex items-center space-x-2">
+          <i class="fas fa-check-circle text-green-500"></i>
+          <span>High quality at a low cost.</span>
+        </div>
+        <div class="flex items-center space-x-2">
+          <i class="fas fa-check-circle text-green-500"></i>
+          <span>High quality at a low cost.</span>
+        </div>
+        <div class="flex items-center space-x-2">
+          <i class="fas fa-check-circle text-green-500"></i>
+          <span>High quality at a low cost.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Vehicle Selection Card Section -->
+  <section class="relative -mt-24 z-20 px-4">
+    <div class="bg-gray-800 p-6 rounded-xl shadow-lg w-full max-w-4xl mx-auto space-y-4">
+
+      <!-- Tab Section -->
+      <div class="flex items-center justify-between">
+        <div class="flex space-x-6">
+          <h2 class="text-2xl font-bold mb-2">Book Now</h2>
+        </div>
+        <div class="flex items-center space-x-2 text-gray-400">
+          <i class="fas fa-user"></i>
+          <span>Need help?</span>
+        </div>
+      </div>
+
+      <!-- Selection Fields -->
+      <div
+        class="bg-gray-700 p-6 rounded-lg flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 items-center">
+
+        <!-- Pick Up Location -->
+        <div class="flex-1">
+          <label class="block text-gray-400 text-sm mb-1">Pick Up Location</label>
+          <div class="flex items-center bg-gray-800 px-4 py-3 rounded-lg">
+            <i class="fas fa-map-marker-alt text-gray-400 mr-2"></i>
+            <select class="bg-gray-800 text-gray-200 outline-none w-full">
+              <option>Dehradun, UK</option>
+              <option>Rishikesh, UK</option>
+              <option>Tehri, UK</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Drop Off Location -->
+        <div class="flex-1">
+          <label class="block text-gray-400 text-sm mb-1">Drop Off Location</label>
+          <div class="flex items-center bg-gray-800 px-4 py-3 rounded-lg">
+            <i class="fas fa-map-marker-alt text-gray-400 mr-2"></i>
+            <select class="bg-gray-800 text-gray-200 outline-none w-full">
+              <option>Dehradun, UK</option>
+              <option>Rishikesh, UK</option>
+              <option>Tehri, UK</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Pick Up Date  -->
+        <div class="flex-1">
+          <label class="block text-gray-400 text-sm mb-1">Pick Up Date & Time</label>
+          <div class="flex items-center bg-gray-800 px-4 py-3 rounded-lg">
+            <i class="fas fa-calendar-alt text-gray-400 mr-2"></i>
+            <input type="text" id="pickUpDate" class="bg-gray-800 text-gray-200 outline-none w-full"
+              placeholder="Thu, Oct 01 2024" />
+          </div>
+        </div>
+
+        <!-- Return Date -->
+        <div class="flex-1">
+          <label class="block text-gray-400 text-sm mb-1">Return Date</label>
+          <div class="flex items-center bg-gray-800 px-4 py-3 rounded-lg">
+            <i class="fas fa-calendar-alt text-gray-400 mr-2"></i>
+            <input type="text" id="returnDate" class="bg-gray-800 text-gray-200 outline-none w-full"
+              placeholder="Mon, Oct 07 2024" />
+          </div>
+        </div>
+
+        <!-- Search Button -->
+        <div class="flex-none">
+          <button
+            class="flex openModalBtn items-center justify-center w-full md:w-auto px-6 py-3 border-2 border-green-400 text-green-400 font-semibold rounded-lg hover:bg-green-600 hover:text-white transition duration-300">
+            <i class="fas fa-search mr-2"></i>
+            Find a Vehicle
+        </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Premium Brands Section -->
+  <section class="py-16 px-12 bg-gray-800 mt-12">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div>
+        <h2 class="text-3xl font-bold mb-2">Premium Brands</h2>
+        <p class="text-gray-400">Unveil the Finest Selection of High-End Vehicles</p>
+      </div>
+      <a href="#" class="text-gray-400 hover:text-gray-200">Show All Brands →</a>
+    </div>
+
+    <!-- Marquee Container -->
+    <div class="overflow-hidden relative mt-8">
+      <div class="marquee flex space-x-6">
+        <!-- Logo Placeholder Boxes -->
+        <div class="bg-gray-900 p-6 rounded-lg flex items-center justify-center w-40 h-32">
+          <img
+            src="https://imgs.search.brave.com/oF3N81DP7TYtAuIYs2_LyJlyu75JEeFUL-egb-HDS2A/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90b3Bw/bmcuY29tL3VwbG9h/ZHMvcHJldmlldy9h/Y3VyYS1sb2dvLWNh/ci1sb2dvLXF1aXot/d2l0aG91dC1uYW1l/cy0xMTU2Mjk0MjM1/MHZtcWxvbjg2a2Iu/cG5n"
+            alt="BMW Logo" class="w-12 h-12">
+        </div>
+        <div class="bg-gray-900 p-6 rounded-lg flex items-center justify-center w-40 h-32">
+          <img
+            src="https://imgs.search.brave.com/FyUY8U0nlZ5O06TIVpnQWhRA61oKr3LqUepxtXxO4NU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Y2l0eXBuZy5jb20v/cHVibGljL3VwbG9h/ZHMvcHJldmlldy9w/bmctaG9uZGEtY2Fy/LXdoaXRlLWxvZ28t/NzAxNzUxNjk0Nzcy/MDgxbXZoeTVubGMz/dS5wbmc_dj0yMDI0/MDkyNTA2"
+            alt="Toyota Logo" class="w-12 h-12">
+        </div>
+        <div class="bg-gray-900 p-6 rounded-lg flex items-center justify-center w-40 h-32">
+          <img
+            src="https://imgs.search.brave.com/qCitzKJZhTlJE1I5s_rZWEfM1CAS9P7xWyQBbDFKgmo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbHVz/cG5nLmNvbS9pbWct/cG5nL2F1ZGktbG9n/by1wbmctLTI0MC5w/bmc"
+            alt="Lexus Logo" class="w-12 h-12">
+        </div>
+        <div class="bg-gray-900 p-6 rounded-lg flex items-center justify-center w-40 h-32">
+          <img
+            src="https://imgs.search.brave.com/H_8iUQAGJO0KW7Trypo7UGTi1OuKLaoCxjkyMkwi7DU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Y2FyLWJyYW5kLW5h/bWVzLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAxNS8wNS9N/ZXJjZWRlcy1zeW1i/b2wtNTAweDQ0NC5q/cGc"
+            alt="Mercedes Logo" class="w-12 h-12">
+        </div>
+        <div class="bg-gray-900 p-6 rounded-lg flex items-center justify-center w-40 h-32">
+          <img
+            src="https://imgs.search.brave.com/5lCaDCM7u_6RalWZm43jcwaZYXDxgeoWRljxr1eqakE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Y2FybG9nb3Mub3Jn/L2Nhci1sb2dvcy9m/b3JkLWxvZ28ucG5n"
+            alt="Bugatti Logo" class="w-12 h-12">
+        </div>
+        <div class="bg-gray-900 p-6 rounded-lg flex items-center justify-center w-40 h-32">
+          <img
+            src="https://imgs.search.brave.com/BkVrGS-HX3diwkfuL8BaknoxsEQQvhi_IXnx9QkfEP0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvZmVhdHVy/ZWQvbGV4dXMtbG9n/by1qejU5Z3R5YjRk/cmJhMWU5LmpwZw"
+            alt="Lexus Logo" class="w-12 h-12">
+        </div>
+        <div class="bg-gray-900 p-6 rounded-lg flex items-center justify-center w-40 h-32">
+          <img
+            src="https://imgs.search.brave.com/A4GLBuZ9a-k0mA2NnsJZonvxCyQVFFRm6Aez3b3l1xo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9mcmVl/cG5nbG9nby5jb20v/aW1hZ2VzL2FsbF9p/bWcvMTcxOTgxMTk3/MWJtdy1sb2dvLXBu/Zy5wbmc"
+            alt="Mercedes Logo" class="w-12 h-12">
+        </div>
+        <div class="bg-gray-900 p-6 rounded-lg flex items-center justify-center w-40 h-32">
+          <img
+            src="https://imgs.search.brave.com/iwpNC1KBS6Xj0ylF0JMI3BR3eGdlclF8csahbUTXbTE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Y2l0eXBuZy5jb20v/cHVibGljL3VwbG9h/ZHMvcHJldmlldy9o/ZC1zdXp1a2ktd2hp/dGUtbG9nby10cmFu/c3BhcmVudC1iYWNr/Z3JvdW5kLTcwMTc1/MTY5NDc3MzE2NWho/dnp3b3Z5YncucG5n/P3Y9MjAyNDA1MDQx/Ng"
+            alt="Mercedes Logo" class="w-12 h-12">
+        </div>
+        <div class="bg-gray-900 p-6 rounded-lg flex items-center justify-center w-40 h-32">
+          <img
+            src="https://imgs.search.brave.com/2mcdN5GD9XmS5cwmpca8MsyISKr_7ZLpaIlJQiuUg58/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jb21w/YW5pZXNsb2dvLmNv/bS9pbWcvb3JpZy9I/WU1URi5ELTVmOTdi/NzhlLnBuZz90PTE3/MjAyNDQ0OTI"
+            alt="Mercedes Logo" class="w-12 h-12">
+        </div>
+        <div class="bg-gray-900 p-6 rounded-lg flex items-center justify-center w-40 h-32">
+          <img
+            src="https://imgs.search.brave.com/87t4fH9AoZ4Gl0oId7gh7m_3adHSF4FP_n7ndZqQDuQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jb21w/YW5pZXNsb2dvLmNv/bS9pbWcvb3JpZy9U/QVRBTU9UT1JTLk5T/X0JJRy5ELTM4ZjY2/YjkxLnBuZz90PTE3/MjAyNDQ0OTQ"
+            alt="Mercedes Logo" class="w-12 h-12">
+        </div>
+        <div class="bg-gray-900 p-6 rounded-lg flex items-center justify-center w-40 h-32">
+          <img
+            src="https://imgs.search.brave.com/fivBMMvKhoIKfhiWPuaamR6bQHHIXh23w8yUL86ICuA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9sb2dv/cy13b3JsZC5uZXQv/d3AtY29udGVudC91/cGxvYWRzLzIwMjIv/MTIvTWFoaW5kcmEt/TG9nby01MDB4Mjgx/LnBuZw"
+            alt="Mercedes Logo" class="w-12 h-12">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Most Searched Vehicles Section -->
+  <section class="py-16 px-12 bg-gray-900">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex justify-between items-center mb-8">
+        <div>
+          <h2 class="text-3xl font-bold">Most Searched Vehicles</h2>
+          <p class="text-gray-400">The world’s leading car brands</p>
+        </div>
+      </div>
+
+      <!-- Vehicle Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+
+        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform transition-transform hover:scale-105">
+          <img src="img/car/dzire.webp" alt="Vehicle Image" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <div class="flex items-center space-x-2 mb-2">
+              <span class="bg-green-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded">4.1</span>
+              <span class="text-gray-400 text-sm">(672 reviews)</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-1">Maruti Suzuki Swift Dzire</h3>
+            <p class="text-gray-400 text-sm mb-4"><i class="fas fa-map-marker-alt"></i> Manchester, England</p>
+            <div class="flex items-center space-x-4 text-gray-400 text-sm mb-4 border-t border-gray-700 pt-3">
+              <div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-tachometer-alt"></i> Sedan</span>
+                </div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-cogs"></i> Manual</span>
+                </div>
+              </div>
+              <div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-gas-pump"></i> Diesel</span>
+                </div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-users"></i> 5 seats</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-lg font-bold text-white">From <span class="text-green-400">Rs.1500</span>/Day</span>
+              <button href="#modal"
+                class="bg-green-600 openModalBtn text-white px-4 py-2 rounded-md hover:bg-gray-700 hover:text-green-500 transition">Book
+                Now</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform transition-transform hover:scale-105">
+          <img src="img/car/exter.jpg" alt="Vehicle Image" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <div class="flex items-center space-x-2 mb-2">
+              <span class="bg-green-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded">4.6</span>
+              <span class="text-gray-400 text-sm">(322 reviews)</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-1">Hyundai Exter</h3>
+            <p class="text-gray-400 text-sm mb-4"><i class="fas fa-map-marker-alt"></i> Dehradun, Uttarakhand</p>
+            <div class="flex items-center space-x-4 text-gray-400 text-sm mb-4 border-t border-gray-700 pt-3">
+              <div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-tachometer-alt"></i> Crossover</span>
+                </div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-cogs"></i> Automatic</span>
+                </div>
+              </div>
+              <div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-gas-pump"></i> Petrol</span>
+                </div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-users"></i> 5 seats</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-lg font-bold text-white">From <span class="text-green-400">Rs.2000</span>/Day</span>
+              <button
+                class="bg-green-600 openModalBtn text-white px-4 py-2 rounded-md hover:bg-gray-700 hover:text-green-500 transition">Book
+                Now</button>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform transition-transform hover:scale-105">
+          <img src="img/car/xuv.webp" alt="Vehicle Image" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <div class="flex items-center space-x-2 mb-2">
+              <span class="bg-green-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded">4.8</span>
+              <span class="text-gray-400 text-sm">(984 reviews)</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-1">Mahindra XUV 700</h3>
+            <p class="text-gray-400 text-sm mb-4"><i class="fas fa-map-marker-alt"></i> Rishikesh, Uttarakhand</p>
+            <div class="flex items-center space-x-4 text-gray-400 text-sm mb-4 border-t border-gray-700 pt-3">
+              <div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-tachometer-alt"></i> SUV</span>
+                </div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-cogs"></i> Automatic</span>
+                </div>
+              </div>
+              <div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-gas-pump"></i> Diesel</span>
+                </div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-users"></i> 7 seats</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-lg font-bold text-white">From <span class="text-green-400">Rs.2500</span>/Day</span>
+              <button
+                class="bg-green-600 openModalBtn text-white px-4 py-2 rounded-md hover:bg-gray-700 hover:text-green-500 transition">Book
+                Now</button>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform transition-transform hover:scale-105">
+          <img src="img/car/creta.webp" alt="Vehicle Image" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <div class="flex items-center space-x-2 mb-2">
+              <span class="bg-green-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded">3.8</span>
+              <span class="text-gray-400 text-sm">(756 reviews)</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-1">Hyundai Creta</h3>
+            <p class="text-gray-400 text-sm mb-4"><i class="fas fa-map-marker-alt"></i> Doiwala, Uttarakhand</p>
+            <div class="flex items-center space-x-4 text-gray-400 text-sm mb-4 border-t border-gray-700 pt-3">
+              <div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-tachometer-alt"></i> SUV</span>
+                </div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-cogs"></i> Automatic</span>
+                </div>
+              </div>
+              <div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-gas-pump"></i> Diesel</span>
+                </div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-users"></i> 5 seats</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-lg font-bold text-white">From <span class="text-green-400">Rs.2000</span>/Day</span>
+              <button
+                class="bg-green-600 openModalBtn text-white px-4 py-2 rounded-md hover:bg-gray-700 hover:text-green-500 transition">Book
+                Now</button>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform transition-transform hover:scale-105">
+          <img src="img/car/suv.jpg" alt="Vehicle Image" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <div class="flex items-center space-x-2 mb-2">
+              <span class="bg-green-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded">4.9</span>
+              <span class="text-gray-400 text-sm">(892 reviews)</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-1">Jeep Rubicon</h3>
+            <p class="text-gray-400 text-sm mb-4"><i class="fas fa-map-marker-alt"></i> Dehradun, Uttarakhand</p>
+            <div class="flex items-center space-x-4 text-gray-400 text-sm mb-4 border-t border-gray-700 pt-3">
+              <div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-tachometer-alt"></i> SUV</span>
+                </div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-cogs"></i> Automatic</span>
+                </div>
+              </div>
+              <div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-gas-pump"></i> Diesel</span>
+                </div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-users"></i> 7 seats</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-lg font-bold text-white">From <span class="text-green-400">Rs.5500</span>/Day</span>
+              <button
+                class="bg-green-600 openModalBtn text-white px-4 py-2 rounded-md hover:bg-gray-700 hover:text-green-500 transition">Book
+                Now</button>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform transition-transform hover:scale-105">
+          <img src="img/car/scorpio.jpeg" alt="Vehicle Image" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <div class="flex items-center space-x-2 mb-2">
+              <span class="bg-green-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded">4.8</span>
+              <span class="text-gray-400 text-sm">(896 reviews)</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-1">Mahindra Scorpio</h3>
+            <p class="text-gray-400 text-sm mb-4"><i class="fas fa-map-marker-alt"></i> Rishikesh, Uttarakhand</p>
+            <div class="flex items-center space-x-4 text-gray-400 text-sm mb-4 border-t border-gray-700 pt-3">
+              <div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-tachometer-alt"></i> SUV</span>
+                </div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-cogs"></i> Automatic</span>
+                </div>
+              </div>
+              <div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-gas-pump"></i> Diesel</span>
+                </div>
+                <div class="flex items-center space-x-1 p-3">
+                  <span><i class="fas fa-users"></i> 7 seats</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-lg font-bold text-white">From <span class="text-green-400">Rs.3000</span>/Day</span>
+              <button
+                class="bg-green-600 openModalBtn text-white px-4 py-2 rounded-md hover:bg-gray-700 hover:text-green-500 transition">Book
+                Now</button>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Add additional cards here for other vehicles, following the same structure -->
+
+      </div>
+
+      <div class="flex justify-center mt-8">
+        <button
+          class="bg-green-500 text-white font-semibold px-6 py-3 rounded-full flex items-center space-x-2 hover:bg-green-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+          <span>Load More Cars</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Browse by Type Section -->
+  <section class="py-16 px-12 bg-gray-800">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex justify-between items-center mb-8">
+        <div>
+          <h2 class="text-3xl font-bold">Browse by Type</h2>
+          <p class="text-gray-400">Find the perfect ride for any occasion</p>
+        </div>
+        <button
+          class="bg-green-500 text-white font-semibold px-6 py-3 rounded-full flex items-center space-x-2 hover:bg-green-600">
+          <span>View More</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Category Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+        <div
+          class="bg-gray-900 rounded-lg overflow-hidden shadow-lg relative transform transition-transform hover:scale-105">
+          <img src="img/car/suv.jpg" alt="SUV Image" class="w-full h-40 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold">SUV</h3>
+            <span class="inline-block bg-gray-700 text-gray-200 text-sm font-medium mt-2 px-3 py-1 rounded-full">84
+              Vehicles</span>
+          </div>
+          <div class="absolute bottom-4 right-4">
+            <i
+              class="fas fa-arrow-right text-gray-400 text-lg bg-gray-800 rounded-full p-2 hover:bg-green-500 hover:text-gray-200"></i>
+          </div>
+        </div>
+
+        <div
+          class="bg-gray-900 rounded-lg overflow-hidden shadow-lg relative transform transition-transform hover:scale-105">
+          <img src="img/car/hatchback.webp" alt="Hatchback Image" class="w-full h-40 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold">Hatchback</h3>
+            <span class="inline-block bg-gray-700 text-gray-200 text-sm font-medium mt-2 px-3 py-1 rounded-full">126
+              Vehicles</span>
+          </div>
+          <div class="absolute bottom-4 right-4">
+            <i
+              class="fas fa-arrow-right text-gray-400 text-lg bg-gray-800 rounded-full p-2 hover:bg-green-500 hover:text-gray-200"></i>
+          </div>
+        </div>
+
+        <div
+          class="bg-gray-900 rounded-lg overflow-hidden shadow-lg relative transform transition-transform hover:scale-105">
+          <img src="img/car/sedan1.webp" alt="Sedan Image" class="w-full h-40 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold">Sedan</h3>
+            <span class="inline-block bg-gray-700 text-gray-200 text-sm font-medium mt-2 px-3 py-1 rounded-full">150
+              Vehicles</span>
+          </div>
+          <div class="absolute bottom-4 right-4">
+            <i
+              class="fas fa-arrow-right text-gray-400 text-lg bg-gray-800 rounded-full p-2 hover:bg-green-500 hover:text-gray-200"></i>
+          </div>
+        </div>
+
+        <div
+          class="bg-gray-900 rounded-lg overflow-hidden shadow-lg relative transform transition-transform hover:scale-105">
+          <img src="img/car/exter.jpg" alt="Crossover Image" class="w-full h-40 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold">Crossover</h3>
+            <span class="inline-block bg-gray-700 text-gray-200 text-sm font-medium mt-2 px-3 py-1 rounded-full">125
+              Vehicles</span>
+          </div>
+          <div class="absolute bottom-4 right-4">
+            <i
+              class="fas fa-arrow-right text-gray-400 text-lg bg-gray-800 rounded-full p-2 hover:bg-green-500 hover:text-gray-200"></i>
+          </div>
+        </div>
+
+        <div
+          class="bg-gray-900 rounded-lg overflow-hidden shadow-lg relative transform transition-transform hover:scale-105">
+          <img src="img/car/minivan.jpg" alt="Minivan Image" class="w-full h-40 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold">Minivan</h3>
+            <span class="inline-block bg-gray-700 text-gray-200 text-sm font-medium mt-2 px-3 py-1 rounded-full">56
+              Vehicles</span>
+          </div>
+          <div class="absolute bottom-4 right-4">
+            <i
+              class="fas fa-arrow-right text-gray-400 text-lg bg-gray-800 rounded-full p-2 hover:bg-green-500 hover:text-gray-200"></i>
+          </div>
+        </div>
+
+        <div
+          class="bg-gray-900 rounded-lg overflow-hidden shadow-lg relative transform transition-transform hover:scale-105">
+          <img src="img/car/coupe.webp" alt="Coupe Image" class="w-full h-40 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold">Coupe</h3>
+            <span class="inline-block bg-gray-700 text-gray-200 text-sm font-medium mt-2 px-3 py-1 rounded-full">25
+              Vehicles</span>
+          </div>
+          <div class="absolute bottom-4 right-4">
+            <i
+              class="fas fa-arrow-right text-gray-400 text-lg bg-gray-800 rounded-full p-2 hover:bg-green-500 hover:text-gray-200"></i>
+          </div>
+        </div>
+
+        <div
+          class="bg-gray-900 rounded-lg overflow-hidden shadow-lg relative transform transition-transform hover:scale-105">
+          <img src="img/car/sports.jpg" alt="Sport Cars Image" class="w-full h-40 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold">Sport Cars</h3>
+            <span class="inline-block bg-gray-700 text-gray-200 text-sm font-medium mt-2 px-3 py-1 rounded-full">12
+              Vehicles</span>
+          </div>
+          <div class="absolute bottom-4 right-4">
+            <i
+              class="fas fa-arrow-right text-gray-400 text-lg bg-gray-800 rounded-full p-2 hover:bg-green-500 hover:text-gray-200"></i>
+          </div>
+        </div>
+
+        <div
+          class="bg-gray-900 rounded-lg overflow-hidden shadow-lg relative transform transition-transform hover:scale-105">
+          <img src="img/car/pickup.cms" alt="Pickup Truck Image" class="w-full h-40 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold">Pickup Truck</h3>
+            <span class="inline-block bg-gray-700 text-gray-200 text-sm font-medium mt-2 px-3 py-1 rounded-full">10
+              Vehicles</span>
+          </div>
+          <div class="absolute bottom-4 right-4">
+            <i
+              class="fas fa-arrow-right text-gray-400 text-lg bg-gray-800 rounded-full p-2 hover:bg-green-500 hover:text-gray-200"></i>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="py-16 px-12 bg-gray-900">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="text-gray-400 text-xl uppercase tracking-wide mb-2">How It Works</p>
+      <h2 class="text-4xl font-bold mb-8">Presenting Your New Go-To Car Rental Experience</h2>
+    </div>
+
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mt-8 text-center">
+
+      <!-- Step 1 -->
+      <div class="space-y-4">
+        <div class="text-5xl text-gray-400">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <h3 class="text-xl font-semibold">Choose a Location</h3>
+        <p class="text-gray-400">Select the ideal destination to begin your journey with ease</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="space-y-4">
+        <div class="text-5xl text-gray-400">
+          <i class="fas fa-car-alt"></i>
+        </div>
+        <h3 class="text-xl font-semibold">Choose Your Vehicle</h3>
+        <p class="text-gray-400">Browse our fleet and find the perfect car for your needs</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="space-y-4">
+        <div class="text-5xl text-gray-400">
+          <i class="fas fa-id-card"></i>
+        </div>
+        <h3 class="text-xl font-semibold">Verification</h3>
+        <p class="text-gray-400">Review your information and confirm your booking</p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="space-y-4">
+        <div class="text-5xl text-gray-400">
+          <i class="fas fa-key"></i>
+        </div>
+        <h3 class="text-xl font-semibold">Begin Your Journey</h3>
+        <p class="text-gray-400">Start your adventure with confidence and ease</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Statistics Section -->
+  <section class="bg-gray-900 py-16 px-12">
+    <div class="container mx-auto px-6 md:px-12">
+      <div class="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+        <!-- Stats -->
+        <div class="flex space-x-8">
+          <div class="text-center">
+            <h3 class="text-4xl font-bold" data-count="45">0</h3>
+            <p class="text-gray-400">Global<br>Branches</p>
+          </div>
+          <div class="text-center">
+            <h3 class="text-4xl font-bold" data-count="29000">0</h3>
+            <p class="text-gray-400">Destinations<br>Collaboration</p>
+          </div>
+          <div class="text-center">
+            <h3 class="text-4xl font-bold" data-count="20">0</h3>
+            <p class="text-gray-400">Years<br>Experience</p>
+          </div>
+          <div class="text-center">
+            <h3 class="text-4xl font-bold" data-count="168000">0</h3>
+            <p class="text-gray-400">Happy<br>Customers</p>
+          </div>
+        </div>
+
+        <!-- Recent Users Box -->
+        <div class="flex items-center bg-gray-800 rounded-lg p-4 shadow-lg space-x-4">
+          <div class="flex -space-x-2">
+            <!-- Profile Images (replace src with actual images) -->
+            <img class="w-10 h-10 rounded-full border-2 border-gray-800"
+              src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+            <img class="w-10 h-10 rounded-full border-2 border-gray-800"
+              src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
+            <img class="w-10 h-10 rounded-full border-2 border-gray-800"
+              src="https://randomuser.me/api/portraits/men/55.jpg" alt="User">
+            <img class="w-10 h-10 rounded-full border-2 border-gray-800"
+              src="https://randomuser.me/api/portraits/women/65.jpg" alt="User">
+          </div>
+          <div class="text-left">
+            <p class="text-green-400 text-lg font-bold">1684 people used</p>
+            <p class="text-white font-semibold">RideYourDrive in the last <span class="text-green-400">24
+                hours</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Deals Section -->
+  <section class="py-16 px-12 bg-gray-800 relative overflow-hidden">
+    <div
+      class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center lg:items-start space-y-8 lg:space-y-0 lg:space-x-12">
+
+      <!-- Text Content -->
+      <div class="flex-1">
+        <div class="inline-block bg-white text-gray-900 text-sm font-semibold px-4 py-2 rounded-full mb-4">Trusted
+          Expertise</div>
+        <h2 class="text-4xl font-bold mb-6 leading-tight">Get a great deal for your vehicle rent to us now</h2>
+        <p class="text-gray-400 mb-6 leading-relaxed">
+          Get the best value for your vehicle with our transparent and straightforward selling process.
+        </p>
+
+        <ul class="space-y-4 mb-8">
+          <li class="flex items-center space-x-3">
+            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+            <span class="text-white font-semibold">Experienced Professionals You Can Trust</span>
+          </li>
+          <li class="flex items-center space-x-3">
+            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+            <span class="text-white font-semibold">Clear and Transparent Pricing, No Hidden Fees</span>
+          </li>
+          <li class="flex items-center space-x-3">
+            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+            <span class="text-white font-semibold">Genuine Spares Parts</span>
+          </li>
+        </ul>
+
+        <button
+          class="bg-green-600 text-gray-200 font-semibold px-6 py-3 rounded-full flex items-center space-x-2 hover:bg-green-700 transition duration-300">
+          <a href="addcar.html">
+            <span>Get Started Now</span>
+          <i class="fas fa-arrow-right"></i>
+          </a>
+        </button>
+      </div>
+
+      <!-- Image Grid -->
+      <div class="flex-1 grid grid-cols-2 gap-4 relative py-16 px-12">
+        <div class="w-full h-40 rounded-xl overflow-hidden">
+          <img src="img/pic/image_1.jpg" alt="Image 1" class="w-full h-full object-cover">
+        </div>
+        <div class="w-full h-40 rounded-xl overflow-hidden">
+          <img src="img/pic/image_6.jpg" alt="Image 2" class="w-full h-full object-cover">
+        </div>
+        <div class="w-full h-40 rounded-xl overflow-hidden">
+          <img src="img/pic/image_4.jpg" alt="Image 3" class="w-full h-full object-cover">
+        </div>
+        <div class="w-full h-40 rounded-xl overflow-hidden">
+          <img src="img/pic/image_5.jpg" alt="Image 4" class="w-full h-full object-cover">
+        </div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-green-700 opacity-20 rounded-full"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Promotional Cards Section -->
+  <section class="py-16 px-12 md:px-12 bg-gray-900">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Card 1 -->
+      <div class="rounded-lg bg-blue-300 p-8 card-bg"
+        style="background-image: url('https://imgs.search.brave.com/Pav6Pn7k-lvCldgkT8rUWmh-rgkDS8-erJVuKR0aXa4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nYWxsLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvOC9XaGl0/ZS1TVVYtUE5HLUZy/ZWUtSW1hZ2UucG5n');">
+        <div class="max-w-xs">
+          <h2 class="text-3xl text-black font-bold mb-4">Looking for a rental car?</h2>
+          <p class="text-gray-700 mb-6">
+            Discover your ideal rental car for every adventure, whether it's a road trip or business travel.
+          </p>
+          <a href="#"
+            class="inline-block openModalBtn bg-green-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-green-700 hover:text-gray-200 transition duration-300">
+            Get Started Now &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="rounded-lg bg-yellow-300 p-8 card-bg"
+        style="background-image: url('https://imgs.search.brave.com/EbZ9i8I2UbHCJ8cO5oBZgf1QoSOpzWnQ2a42giismrk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nYWxsLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMjAxNi8w/Ny9DYXItUE5HLVBp/Y3R1cmUucG5n');">
+        <div class="max-w-xs">
+          <h2 class="text-3xl text-black font-bold mb-4">Looking to a rent car?</h2>
+          <p class="text-gray-700 mb-6">
+            Maximize your vehicle's potential: seamlessly rent or sell with confidence.
+            Discover your ideal rental car for every adventure, whether it's a road trip or business travel.
+          </p>
+          <a href="/src/verification.html"
+            class="inline-block bg-white text-gray-900 font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition duration-300">
+            Get Started Now &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Review Section -->
+  <section class="py-16 px-12 bg-gray-900">
+    <div class="max-w-6xl mx-auto px-8 text-center">
+      <h2 class="text-4xl font-bold mb-8">What they say about us?</h2>
+    </div>
+
+    <!-- Scrolling Reviews Container -->
+    <div class="overflow-hidden">
+      <div class="scrolling-reviews">
+
+        <div class="bg-gray-800 p-6 rounded-lg w-80 shadow-lg flex-shrink-0">
+          <h3 class="text-xl font-semibold mb-3">Great Features and Process</h3>
+          <p class="text-gray-400 mb-4">I was impressed by the range of features available when booking. The
+            calendar tool for selecting dates was especially useful, and I appreciated the live availability
+            feature.</p>
+          <div class="flex items-center space-x-3">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Photo"
+              class="w-12 h-12 rounded-full border-2 border-gray-700">
+            <div>
+              <p class="font-bold">Sara Mohamed</p>
+              <p class="text-gray-400 text-sm">Jakarta</p>
+            </div>
+          </div>
+          <div class="flex mt-4">
+            <!-- Star Ratings (using placeholder icons here) -->
+            <span class="text-green-500 text-lg">★★★★★</span>
+          </div>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-lg w-80 shadow-lg flex-shrink-0">
+          <h3 class="text-xl font-semibold mb-3">Easy to Understand</h3>
+          <p class="text-gray-400 mb-4">The attention to detail in the booking process made our trip
+            stress-free, allowing us to focus on creating lasting memories together.</p>
+          <div class="flex items-center space-x-3">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User Photo"
+              class="w-12 h-12 rounded-full border-2 border-gray-700">
+            <div>
+              <p class="font-bold">John Doe</p>
+              <p class="text-gray-400 text-sm">New York</p>
+            </div>
+          </div>
+          <div class="flex mt-4">
+            <!-- Star Ratings (using placeholder icons here) -->
+            <span class="text-green-500 text-lg">★★★★★</span>
+          </div>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-lg w-80 shadow-lg flex-shrink-0">
+          <h3 class="text-xl font-semibold mb-3">Highly Recommended</h3>
+          <p class="text-gray-400 mb-4">This was by far the best car rental experience I've had! The staff was
+            friendly, and the car was in excellent condition.</p>
+          <div class="flex items-center space-x-3">
+            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="User Photo"
+              class="w-12 h-12 rounded-full border-2 border-gray-700">
+            <div>
+              <p class="font-bold">Jane Smith</p>
+              <p class="text-gray-400 text-sm">London</p>
+            </div>
+          </div>
+          <div class="flex mt-4">
+            <!-- Star Ratings (using placeholder icons here) -->
+            <span class="text-green-500 text-lg">★★★★★</span>
+          </div>
+        </div>
+
+        <!-- Additional reviews to make scrolling effect smooth -->
+        <!-- Repeat cards if necessary to create a seamless scroll effect -->
+        <div class="bg-gray-800 p-6 rounded-lg w-80 shadow-lg flex-shrink-0">
+          <h3 class="text-xl font-semibold mb-3">Excellent Service</h3>
+          <p class="text-gray-400 mb-4">The entire process was smooth and efficient. The car selection was
+            great, and the staff provided all the information we needed.</p>
+          <div class="flex items-center space-x-3">
+            <img src="https://randomuser.me/api/portraits/women/50.jpg" alt="User Photo"
+              class="w-12 h-12 rounded-full border-2 border-gray-700">
+            <div>
+              <p class="font-bold">David Brown</p>
+              <p class="text-gray-400 text-sm">Paris</p>
+            </div>
+          </div>
+          <div class="flex mt-4">
+            <!-- Star Ratings (using placeholder icons here) -->
+            <span class="text-green-500 text-lg">★★★★★</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer Section -->
+  <footer class="bg-slate-600 text-gray-400 py-16 px-12 pb-5 ">
+    <div class="max-w-7xl mx-auto px-4">
+
+      <!-- Subscription Prompt -->
+      <div class="flex flex-col lg:flex-row justify-between items-center border-b border-gray-700 pb-8 mb-8">
+        <h2 class="text-2xl font-semibold text-white mb-4 lg:mb-0">Subscribe to see secret deals prices <br> drop the
+          moment
+          you sign up!</h2>
+        <div class="flex items-center space-x-3">
+          <input type="email" placeholder="Enter your email"
+            class="bg-gray-800 text-gray-300 border border-gray-700 rounded-md px-4 py-2 w-72 focus:outline-none focus:border-green-500" />
+          <button
+            class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 hover:text-green-500 transition">Subscribe</button>
+        </div>
+      </div>
+
+      <!-- Footer Links and Info -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+
+        <!-- Company Info -->
+        <div>
+          <div class="flex items-center space-x-2 mb-4">
+            <!-- <img src="https://via.placeholder.com/32" alt="RideYourDrive Logo"
+              class="w-8 h-8 rounded-full bg-green-500"> -->
+            <h4 class="text-xl font-semibold text-white">RideYourDrive</h4>
+          </div>
+          <p>249201 RISHIKESH,DEHRADUN , UTTAKHAND , INDIA</p>
+          <p class="mt-2"><i class="far fa-clock mr-1"></i> 8:00 - 17:00, Mon - Sat</p>
+          <p class="mt-2"><i class="far fa-envelope mr-1"></i> support@RideYourDrive.in</p>
+          <p class="mt-4 flex items-center"><i class="fas fa-phone-alt mr-2"></i> Need help? Call us</p>
+          <p class="text-green-500 font-semibold">+1 222-555-33-99</p>
+        </div>
+
+        <!-- Company Links -->
+        <div>
+          <h4 class="text-lg font-semibold text-white mb-4">Company</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white">About Us</a></li>
+            <li><a href="#" class="hover:text-white">Our Awards</a></li>
+            <li><a href="#" class="hover:text-white">Agencies</a></li>
+            <li><a href="#" class="hover:text-white">Copyright Notices</a></li>
+            <li><a href="#" class="hover:text-white">Terms of Use</a></li>
+            <li><a href="#" class="hover:text-white">Privacy Notice</a></li>
+            <li><a href="#" class="hover:text-white">Lost & Found</a></li>
+          </ul>
+        </div>
+
+        <!-- Services Links -->
+        <div>
+          <h4 class="text-lg font-semibold text-white mb-4">Our Services</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white">Car Rental Services</a></li>
+            <li><a href="#" class="hover:text-white">Vehicle Leasing Options</a></li>
+            <li><a href="#" class="hover:text-white">Long-Term Car Rentals</a></li>
+            <li><a href="#" class="hover:text-white">Car Sales and Trade-Ins</a></li>
+            <li><a href="#" class="hover:text-white">Luxury Car Rentals</a></li>
+            <li><a href="#" class="hover:text-white">Rent-to-Own Programs</a></li>
+            <li><a href="#" class="hover:text-white">Fleet Management Solutions</a></li>
+          </ul>
+        </div>
+
+        <!-- Partners Links -->
+        <div>
+          <h4 class="text-lg font-semibold text-white mb-4">Our Partners</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white">Affiliates</a></li>
+            <li><a href="#" class="hover:text-white">Travel Agents</a></li>
+            <li><a href="#" class="hover:text-white">AARP Members</a></li>
+            <li><a href="#" class="hover:text-white">Points Programs</a></li>
+            <li><a href="#" class="hover:text-white">Military & Veterans</a></li>
+            <li><a href="#" class="hover:text-white">Work with us</a></li>
+            <li><a href="#" class="hover:text-white">Advertise with us</a></li>
+          </ul>
+        </div>
+
+        <!-- Support Links -->
+        <div>
+          <h4 class="text-lg font-semibold text-white mb-4">Support</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white">Forum support</a></li>
+            <li><a href="#" class="hover:text-white">Help Center</a></li>
+            <li><a href="#" class="hover:text-white">Live chat</a></li>
+            <li><a href="#" class="hover:text-white">How it works</a></li>
+            <li><a href="#" class="hover:text-white">Security</a></li>
+            <li><a href="#" class="hover:text-white">Refund Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="border-t border-gray-700 mt-8 pt-4 text-center">
+        <p>&copy; 2024 RideYourDrive Inc. All rights reserved.</p>
+      </div>
+
+    </div>
+  </footer>
+
+
+
+  <!-- Modal Background (Initially Hidden) -->
+  <div id="modal" class="fixed inset-0 bg-gray-300 bg-opacity-50 flex justify-center items-center z-50 hidden">
+    <!-- Modal Container -->
+    <div class="bg-gray-700 rounded-lg shadow-lg px-16 py-8 relative" style="max-width: 550px; max-height: 590px;">
+      <!-- Close Button -->
+      <button class="closeModalBtn absolute top-4 right-4 text-white text-lg font-semibold">
+        &times;
+      </button>
+
+      <!-- Modal Title -->
+      <h2 class="text-3xl font-bold text-center mb-8">Verification</h2>
+
+      <!-- Input Fields -->
+      <form class="w-full max-w-lg">
+        <div class="flex flex-wrap -mx-3 mb-3">
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="grid-first-name">
+              First Name
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane">
+        
+          </div>
+          <div class="w-full md:w-1/2 px-3">
+            <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="grid-last-name">
+              Last Name
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe">
+          </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-3">
+          <div class="w-full px-3">
+            <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="grid-password">
+              Driving License
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="" type="text" placeholder="Enter Driving License">
+          </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-3">
+          <div class="w-full px-3">
+            <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="grid-password">
+              Pan Card
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="" type="text" placeholder="Enter Pan Card">
+          </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-3">
+          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="grid-city">
+              City
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="Albuquerque">
+          </div>
+          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="grid-state">
+              State
+            </label>
+            <div class="relative">
+              <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                <option>New Mexico</option>
+                <option>Missouri</option>
+                <option>Texas</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="grid-zip">
+              Zip
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="90210">
+          </div>
+        </div>
+      </form>
+      
+
+      <!-- Verify Button -->
+      <div class="flex justify-between mt-6">
+        <button
+          class="closeModalBtn w-full m-3 p-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+          Close
+        </button>
+        <button
+          class="w-full m-3 p-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          Verify
+        </button>
+      </div>
+    </div>
+  </div>
+
+  
+<script>
+  // Select all open modal buttons
+const openModalBtns = document.querySelectorAll('.openModalBtn');
+
+// Select the modal and close buttons
+const modal = document.getElementById('modal');
+const closeModalBtns = document.querySelectorAll('.closeModalBtn');
+
+// Add click event listener to each 'Open Modal' button
+openModalBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+    modal.classList.add('visible'); // Show the modal with transition
+  });
+});
+
+// Add click event listener to each 'Close Modal' button
+closeModalBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    modal.classList.remove('visible');
+    modal.classList.add('hidden'); // Hide the modal with transition
+  });
+});
+
+// Optional: Close the modal when clicking outside of it
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.classList.remove('visible');
+    modal.classList.add('hidden');
+  }
+});
+</script>
+
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Initialize Flatpickr for Return Date
+      flatpickr("#returnDate", {
+        dateFormat: "D, M d Y",  // Customize date format as needed
+      });
+
+      // Initialize Flatpickr for Pick Up Date & Time
+      flatpickr("#pickUpDate", {
+        dateFormat: "D, M d Y",  // Custom date and time format
+      });
+    });
+  </script>
+
+  <!-- Count Up Animation Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const counters = document.querySelectorAll("[data-count]");
+      counters.forEach(counter => {
+        const updateCount = () => {
+          const target = +counter.getAttribute("data-count");
+          const current = +counter.innerText;
+          const increment = target / 100;
+
+          if (current < target) {
+            counter.innerText = Math.ceil(current + increment);
+            setTimeout(updateCount, 20);
+          } else {
+            counter.innerText = target.toLocaleString();
+          }
+        };
+        updateCount();
+      });
+    });
+  </script>
+  <script>
+
+    // JavaScript for Counter Animation
+    document.addEventListener("DOMContentLoaded", function () {
+      const counters = document.querySelectorAll('.counter');
+      counters.forEach(counter => {
+        const updateCount = () => {
+          const target = +counter.getAttribute('data-target');
+          const count = +counter.innerText;
+
+          const increment = target / 200; // Adjust the increment speed here
+
+          if (count < target) {
+            counter.innerText = Math.ceil(count + increment);
+            setTimeout(updateCount, 10); // Update every 10ms for smooth animation
+          } else {
+            counter.innerText = target;
+          }
+        };
+
+        updateCount();
+      });
+    });
+  </script>
+</body>
+
+</html>
