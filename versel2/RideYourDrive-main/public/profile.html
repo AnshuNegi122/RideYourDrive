@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - RideYourDrive</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-800 text-white">
+    <!-- Navigation Bar -->
+    <header class="bg-gray-900 px-8 py-6 flex justify-between items-center">
+        <div class="text-lg font-semibold">
+            <a href="index.html">RideYourDrive</a>
+        </div>
+        <nav class="space-x-8 hidden md:flex">
+            <a href="#" class="hidden hover:text-gray-300 text-sm font-semibold leading-6">Home</a>
+            <a href="#" class="hidden hover:text-gray-300 text-sm font-semibold leading-6">Cars</a>
+            <a href="#" class="hidden hover:text-gray-300 text-sm font-semibold leading-6">About</a>
+            <a href="#" class="hidden hover:text-gray-300 text-sm font-semibold leading-6">Contact</a>
+        </nav>
+        <a href="login.html" class="text-white hover:text-gray-300">Log in →</a>
+    </header>
+
+    <!-- Profile Section -->
+    <section class="py-16 px-4 md:px-12">
+        <div class="max-w-4xl mx-auto bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+            <div class="md:flex">
+                <!-- Sidebar -->
+                <div class="md:w-1/3 bg-gray-800 p-6">
+                    <div class="text-center mb-6">
+                        <div class="w-32 h-32 rounded-full bg-gray-700 mx-auto mb-4 flex items-center justify-center">
+                            <i class="fas fa-user text-5xl text-gray-500"></i>
+                        </div>
+                        <h2 id="profile-name" class="text-xl font-semibold">User Name</h2>
+                        <p id="profile-email" class="text-gray-400">user@example.com</p>
+                    </div>
+                    <nav>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="#personal-info" class="block py-2 px-4 rounded hover:bg-gray-700 bg-gray-700">
+                                    <i class="fas fa-user-circle mr-2"></i> Personal Information
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#bookings" class="block py-2 px-4 rounded hover:bg-gray-700">
+                                    <i class="fas fa-calendar-alt mr-2"></i> My Bookings
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#security" class="block py-2 px-4 rounded hover:bg-gray-700">
+                                    <i class="fas fa-lock mr-2"></i> Security
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                
+                <!-- Main Content -->
+                <div class="md:w-2/3 p-6">
+                    <div id="personal-info" class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4">Personal Information</h3>
+                        <form id="profile-form">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-gray-400 text-sm mb-1">Full Name</label>
+                                    <input type="text" id="name" class="w-full bg-gray-700 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-400 text-sm mb-1">Email</label>
+                                    <input type="email" id="email" class="w-full bg-gray-700 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500" readonly>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-400 text-sm mb-1">Phone Number</label>
+                                    <input type="tel" id="phone" class="w-full bg-gray-700 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-400 text-sm mb-1">Address</label>
+                                    <input type="text" id="address" class="w-full bg-gray-700 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500">
+                                </div>
+                            </div>
+                            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">Save Changes</button>
+                        </form>
+                    </div>
+                    
+                    <div id="security" class="mb-8 hidden">
+                        <h3 class="text-xl font-semibold mb-4">Security</h3>
+                        <form id="password-form">
+                            <div class="space-y-4 mb-4">
+                                <div>
+                                    <label class="block text-gray-400 text-sm mb-1">Current Password</label>
+                                    <input type="password" id="current-password" class="w-full bg-gray-700 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-400 text-sm mb-1">New Password</label>
+                                    <input type="password" id="new-password" class="w-full bg-gray-700 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-400 text-sm mb-1">Confirm New Password</label>
+                                    <input type="password" id="confirm-password" class="w-full bg-gray-700 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500">
+                                </div>
+                            </div>
+                            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">Update Password</button>
+                        </form>
+                    </div>
+                    
+                    <div id="bookings" class="hidden">
+                        <h3 class="text-xl font-semibold mb-4">My Bookings</h3>
+                        <div id="bookings-container" class="space-y-4">
+                            <!-- Bookings will be loaded here -->
+                            <div class="text-gray-400">Loading your bookings...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <p>&copy; 2024 RideYourDrive. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                document.querySelectorAll('nav a').forEach(l => {
+                    l.classList.remove('bg-gray-700');
+                });
+                
+                // Add active class to clicked link
+                this.classList.add('bg-gray-700');
+                
+                // Hide all content sections
+                document.querySelectorAll('#personal-info, #bookings, #security').forEach(section => {
+                    section.classList.add('hidden');
+                });
+                
+                // Show the target section
+                const targetId = this.getAttribute('href').substring(1);
+                document.getElementById(targetId).classList.remove('hidden');
+            });
+        });
+
+        // Load user profile data
+        document.addEventListener('DOMContentLoaded', async function() {
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            
+            if (!userInfo || !userInfo.token) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Update profile sidebar
+            document.getElementById('profile-name').textContent = userInfo.name;
+            document.getElementById('profile-email').textContent = userInfo.email;
+            
+            // Fill form fields
+            document.getElementById('name').value = userInfo.name;
+            document.getElementById('email').value = userInfo.email;
+            
+            try {
+                // Fetch user profile data
+                const response = await fetch('http://localhost:5000/api/users/profile', {
+                    headers: {
+                        'Authorization': `Bearer ${userInfo.token}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const profileData = await response.json();
+                    
+                    // Fill additional fields if available
+                    if (profileData.phone) document.getElementById('phone').value = profileData.phone;
+                    if (profileData.address) document.getElementById('address').value = profileData.address;
+                }
+                
+                // Fetch user bookings
+                const bookingsResponse = await fetch('http://localhost:5000/api/bookings', {
+                    headers: {
+                        'Authorization': `Bearer ${userInfo.token}`
+                    }
+                });
+                
+                if (bookingsResponse.ok) {
+                    const bookingsData = await bookingsResponse.json();
+                    const bookingsContainer = document.getElementById('bookings-container');
+                    
+                    if (bookingsData.length === 0) {
+                        bookingsContainer.innerHTML = '<p class="text-gray-400">You have no bookings yet.</p>';
+                    } else {
+                        bookingsContainer.innerHTML = '';
+                        
+                        bookingsData.forEach(booking => {
+                            const bookingCard = document.createElement('div');
+                            bookingCard.className = 'bg-gray-800 p-4 rounded-lg';
+                            
+                            const pickupDate = new Date(booking.pickupDate).toLocaleDateString();
+                            const returnDate = new Date(booking.returnDate).toLocaleDateString();
+                            
+                            bookingCard.innerHTML = `
+                                <div class="flex justify-between items-start mb-2">
+                                    <h4 class="font-semibold">${booking.carId.brand} ${booking.carId.model}</h4>
+                                    <span class="bg-${getStatusColor(booking.bookingStatus)} text-white text-xs px-2 py-1 rounded">
+                                        ${booking.bookingStatus}
+                                    </span>
+                                </div>
+                                <div class="text-sm text-gray-400 mb-2">
+                                    <p><i class="fas fa-calendar-alt mr-1"></i> ${pickupDate} to ${returnDate}</p>
+                                    <p><i class="fas fa-map-marker-alt mr-1"></i> ${booking.pickupLocation} to ${booking.dropoffLocation}</p>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="font-semibold">₹${booking.totalAmount}</span>
+                                    <button class="text-sm text-green-500 hover:text-green-400">View Details</button>
+                                </div>
+                            `;
+                            
+                            bookingsContainer.appendChild(bookingCard);
+                        });
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching profile data:', error);
+            }
+            
+            // Update auth UI
+            updateAuthUI();
+        });
+        
+        // Helper function for booking status colors
+        function getStatusColor(status) {
+            switch(status) {
+                case 'Confirmed': return 'green-600';
+                case 'Pending': return 'yellow-600';
+                case 'Cancelled': return 'red-600';
+                case 'Completed': return 'blue-600';
+                default: return 'gray-600';
+            }
+        }
+        
+        // Profile form submission
+        document.getElementById('profile-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            
+            if (!userInfo || !userInfo.token) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            const updatedProfile = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value
+            };
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/users/profile', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${userInfo.token}`
+                    },
+                    body: JSON.stringify(updatedProfile)
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Update stored user info
+                    userInfo.name = data.name;
+                    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+                    
+                    // Update displayed name
+                    document.getElementById('profile-name').textContent = data.name;
+                    
+                    alert('Profile updated successfully!');
+                } else {
+                    const error = await response.json();
+                    alert(`Error: ${error.message}`);
+                }
+            } catch (error) {
+                console.error('Error updating profile:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+        
+        // Password form submission
+        document.getElementById('password-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            
+            if (!userInfo || !userInfo.token) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (newPassword !== confirmPassword) {
+                alert('New passwords do not match!');
+                return;
+            }
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/users/profile', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${userInfo.token}`
+                    },
+                    body: JSON.stringify({
+                        currentPassword,
+                        password: newPassword
+                    })
+                });
+                
+                if (response.ok) {
+                    alert('Password updated successfully!');
+                    document.getElementById('password-form').reset();
+                } else {
+                    const error = await response.json();
+                    alert(`Error: ${error.message}`);
+                }
+            } catch (error) {
+                console.error('Error updating password:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+        
+        // Auth UI update function
+        function updateAuthUI() {
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            const loginLink = document.querySelector('header a[href="login.html"]');
+            
+            if (userInfo && userInfo.token) {
+                // User is logged in
+                if (loginLink) {
+                    // Replace login link with user dropdown
+                    const headerNav = loginLink.parentElement;
+                    loginLink.remove();
+                    
+                    // Create user dropdown
+                    const userDropdown = document.createElement('div');
+                    userDropdown.className = 'relative';
+                    userDropdown.innerHTML = `
+                        <button id="userDropdownBtn" class="flex items-center space-x-1 text-white hover:text-gray-300">
+                            <span>${userInfo.name}</span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="userDropdownMenu" class="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 z-50 hidden">
+                            <a href="profile.html" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">My Profile</a>
+                            <a href="dashboard.html" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">Dashboard</a>
+                            <a href="#" id="logoutBtn" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">Logout</a>
+                        </div>
+                    `;
+                    
+                    headerNav.appendChild(userDropdown);
+                    
+                    // Add event listeners for dropdown
+                    const dropdownBtn = document.getElementById('userDropdownBtn');
+                    const dropdownMenu = document.getElementById('userDropdownMenu');
+                    
+                    dropdownBtn.addEventListener('click', () => {
+                        dropdownMenu.classList.toggle('hidden');
+                    });
+                    
+                    // Close dropdown when clicking outside
+                    document.addEventListener('click', (e) => {
+                        if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                            dropdownMenu.classList.add('hidden');
+                        }
+                    });
+                    
+                    // Add logout functionality
+                    document.getElementById('logoutBtn').addEventListener('click', (e) => {
+                        e.preventDefault();
+                        localStorage.removeItem('userInfo');
+                        window.location.href = 'index.html';
+                    });
+                }
+            }
+        }
+    </script>
+</body>
+</html>

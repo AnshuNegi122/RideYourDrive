@@ -1,0 +1,32 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/
+.idea/
+
+# Dependency lock files (optional, if using only one lock system)
+# Uncomment one if you want to ignore it
+# package-lock.json
+# yarn.lock
+
+# Build outputs (if any)
+dist/
+build/
+
+# Public uploads or runtime user content (if applicable)
+public/uploads/

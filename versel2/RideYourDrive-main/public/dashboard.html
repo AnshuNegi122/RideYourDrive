@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - RideYourDrive</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-800 text-white">
+    <!-- Navigation Bar -->
+    <header class="bg-gray-900 px-8 py-6 flex justify-between items-center">
+        <div class="text-lg font-semibold">
+            <a href="index.html">RideYourDrive</a>
+        </div>
+        <nav class="space-x-8 hidden md:flex">
+            <a href="index.html" class="hidden hover:text-gray-300 text-sm font-semibold leading-6">Home</a>
+            <a href="#" class="hidden hover:text-gray-300 text-sm font-semibold leading-6">Cars</a>
+            <a href="#" class="hidden hover:text-gray-300 text-sm font-semibold leading-6">About</a>
+            <a href="#" class="hidden hover:text-gray-300 text-sm font-semibold leading-6">Contact</a>
+        </nav>
+        <a href="login.html" class="text-white hover:text-gray-300">Log in →</a>
+    </header>
+
+    <!-- Dashboard Section -->
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-gray-900 p-4 hidden md:block">
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold mb-4">Dashboard</h2>
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
+                        <i class="fas fa-user text-gray-400"></i>
+                    </div>
+                    <div>
+                        <p id="sidebar-name" class="font-medium">User Name</p>
+                        <p id="sidebar-role" class="text-xs text-gray-400">User</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#overview" class="flex items-center space-x-2 py-2 px-3 rounded hover:bg-gray-800 bg-gray-800">
+                            <i class="fas fa-tachometer-alt w-5"></i>
+                            <span>Overview</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#bookings" class="flex items-center space-x-2 py-2 px-3 rounded hover:bg-gray-800">
+                            <i class="fas fa-calendar-alt w-5"></i>
+                            <span>Bookings</span>
+                        </a>
+                    </li>
+                    <li id="company-nav-item" class="hidden">
+                        <a href="#company" class="flex items-center space-x-2 py-2 px-3 rounded hover:bg-gray-800">
+                            <i class="fas fa-building w-5"></i>
+                            <span>Company</span>
+                        </a>
+                    </li>
+                    <li id="cars-nav-item" class="hidden">
+                        <a href="#cars" class="flex items-center space-x-2 py-2 px-3 rounded hover:bg-gray-800">
+                            <i class="fas fa-car w-5"></i>
+                            <span>My Cars</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="sidebar-logout" class="flex items-center space-x-2 py-2 px-3 rounded hover:bg-gray-800 text-red-400">
+                            <i class="fas fa-sign-out-alt w-5"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 p-8">
+            <!-- Overview Section -->
+            <div id="overview-section">
+                <h2 class="text-2xl font-semibold mb-6">Dashboard Overview</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <!-- Stats Cards -->
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-400 text-sm">Total Bookings</p>
+                                <h3 id="total-bookings" class="text-2xl font-bold mt-1">0</h3>
+                            </div>
+                            <div class="bg-blue-500 bg-opacity-20 p-3 rounded-full">
+                                <i class="fas fa-calendar-check text-blue-500"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-4">
+                            <span id="booking-trend" class="text-green-500"><i class="fas fa-arrow-up"></i> 0%</span> from last month
+                        </p>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-400 text-sm">Active Bookings</p>
+                                <h3 id="active-bookings" class="text-2xl font-bold mt-1">0</h3>
+                            </div>
+                            <div class="bg-green-500 bg-opacity-20 p-3 rounded-full">
+                                <i class="fas fa-car text-green-500"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-4">
+                            <span class="text-green-500"><i class="fas fa-check"></i></span> Currently active
+                        </p>
+                    </div>
+                    
+                    <div id="company-stats" class="bg-gray-900 p-6 rounded-lg hidden">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-400 text-sm">Total Cars</p>
+                                <h3 id="total-cars" class="text-2xl font-bold mt-1">0</h3>
+                            </div>
+                            <div class="bg-purple-500 bg-opacity-20 p-3 rounded-full">
+                                <i class="fas fa-car-side text-purple-500"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-4">
+                            <span id="cars-available" class="text-green-500">0 available</span> for booking
+                        </p>
+                    </div>
+                    
+                    <div id="revenue-stats" class="bg-gray-900 p-6 rounded-lg hidden">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-400 text-sm">Total Revenue</p>
+                                <h3 id="total-revenue" class="text-2xl font-bold mt-1">₹0</h3>
+                            </div>
+                            <div class="bg-yellow-500 bg-opacity-20 p-3 rounded-full">
+                                <i class="fas fa-rupee-sign text-yellow-500"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-4">
+                            <span id="revenue-trend" class="text-green-500"><i class="fas fa-arrow-up"></i> 0%</span> from last month
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Recent Activity -->
+                <div class="bg-gray-900 rounded-lg p-6 mb-8">
+                    <h3 class="text-xl font-semibold mb-4">Recent Activity</h3>
+                    <div id="recent-activity" class="space-y-4">
+                        <p class="text-gray-400">No recent activity</p>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4">Quick Actions</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <a href="#bookings" class="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition">
+                            <i class="fas fa-search text-blue-500 mb-2"></i>
+                            <h4 class="font-medium">Find a Car</h4>
+                            <p class="text-sm text-gray-400">Browse available cars</p>
+                        </a>
+                        <a href="#bookings" class="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition">
+                            <i class="fas fa-calendar-alt text-green-500 mb-2"></i>
+                            <h4 class="font-medium">View Bookings</h4>
+                            <p class="text-sm text-gray-400">Check your bookings</p>
+                        </a>
+                        <a href="profile.html" class="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition">
+                            <i class="fas fa-user-edit text-purple-500 mb-2"></i>
+                            <h4 class="font-medium">Update Profile</h4>
+                            <p class="text-sm text-gray-400">Edit your information</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bookings Section -->
+            <div id="bookings-section" class="hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold">My Bookings</h2>
+                    <a href="index.html" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition flex items-center space-x-2">
+                        <i class="fas fa-plus"></i>
+                        <span>New Booking</span>
+                    </a>
+                </div>
+                
+                <!-- Booking Filters -->
+                <div class="bg-gray-900 p-4 rounded-lg mb-6 flex flex-wrap gap-4">
+                    <div class="flex-1 min-w-[200px]">
+                        <label class="block text-gray-400 text-sm mb-1">Status</label>
+                        <select class="w-full bg-gray-800 text-white px-4 py-2 rounded focus:outline-none">
+                            <option value="all">All Bookings</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="pending">Pending</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="flex-1 min-w-[200px]">
+                        <label class="block text-gray-400 text-sm mb-1">Date Range</label>
+                        <select class="w-full bg-gray-800 text-white px-4 py-2 rounded focus:outline-none">
+                            <option value="all">All Time</option>
+                            <option value="this-month">This Month</option>
+                            <option value="last-month">Last Month</option>
+                            <option value="last-3-months">Last 3 Months</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                    </div>
+                    <div class="flex-1 min-w-[200px]">
+                        <label class="block text-gray-400 text-sm mb-1">Search</label>
+                        <input type="text" placeholder="Search bookings..." class="w-full bg-gray-800 text-white px-4 py-2 rounded focus:outline-none">
+                    </div>
+                </div>
+                
+                <!-- Bookings List -->
+                <div id="bookings-list" class="space-y-4">
+                    <p class="text-gray-400">Loading bookings...</p>
+                </div>
+            </div>
+            
+            <!-- Company Section -->
+            <div id="company-section" class="hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold">Company Management</h2>
+                    <a href="addcompany.html" id="add-company-btn" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition flex items-center space-x-2">
+                        <i class="fas fa-plus"></i>
+                        <span>Register Company</span>
+                    </a>
+                </div>
+                
+                <div id="company-details" class="hidden">
+                    <!-- Company details will be loaded here -->
+                </div>
+                
+                <div id="no-company-message" class="bg-gray-900 p-6 rounded-lg text-center">
+                    <i class="fas fa-building text-5xl text-gray-700 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">No Company Registered</h3>
+                    <p class="text-gray-400 mb-4">You haven't registered a company yet. Register your company to start listing your cars.</p>
+                    <a href="addcompany.html" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition inline-block">
+                        Register Now
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Cars Section -->
+            <div id="cars-section" class="hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold">My Cars</h2>
+                    <a href="addcar.html" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition flex items-center space-x-2">
+                        <i class="fas fa-plus"></i>
+                        <span>Add New Car</span>
+                    </a>
+                </div>
+                
+                <!-- Cars List -->
+                <div id="cars-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <p class="text-gray-400 col-span-full">Loading cars...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let userInfo;
+        let userRole;
+        
+        // Load dashboard data
+        document.addEventListener('DOMContentLoaded', async function() {
+            userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            
+            if (!userInfo || !userInfo.token) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            userRole = userInfo.role;
+            
+            // Update sidebar user info
+            document.getElementById('sidebar-name').textContent = userInfo.name;
+            document.getElementById('sidebar-role').textContent = userRole.charAt(0).toUpperCase() + userRole.slice(1);
+            
+            // Show/hide sections based on user role
+            if (userRole === 'company' || userRole === 'admin') {
+                document.getElementById('company-nav-item').classList.remove('hidden');
+                document.getElementById('cars-nav-item').classList.remove('hidden');
+                document.getElementById('company-stats').classList.remove('hidden');
+                document.getElementById('revenue-stats').classList.remove('hidden');
+            }
+            
+            // Load overview data
+            await loadOverviewData();
+            
+            // Add event listeners for sidebar navigation
+            document.querySelectorAll('nav a').forEach(link => {
+                if (link.id !== 'sidebar-logout') {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        // Remove active class from all links
+                        document.querySelectorAll('nav a').forEach(l => {
+                            l.classList.remove('bg-gray-800');
+                        });
+                        
+                        // Add active class to clicked link
+                        this.classList.add('bg-gray-800');
+                        
+                        // Hide all content sections
+                        document.querySelectorAll('#overview-section, #bookings-section, #company-section, #cars-section').forEach(section => {
+                            section.classList.add('hidden');
+                        });
+                        
+                        // Show the target section
+                        const targetId = this.getAttribute('href').substring(1);
+                        document.getElementById(`${targetId}-section`).classList.remove('hidden');
+                        
+                        // Load section data
+                        if (targetId === 'bookings') {
+                            loadBookingsData();
+                        } else if (targetId === 'company') {
+                            loadCompanyData();
+                        } else if (targetId === 'cars') {
+                            loadCarsData();
+                        }
+                    });
+                }
+            });
+            
+            // Add logout functionality
+            document.getElementById('sidebar-logout').addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('userInfo');
+                window.location.href = 'index.html';
+            });
+            
+            // Update auth UI
+            updateAuthUI();
+        });
+        
+        // Load overview data
+        async function loadOverviewData() {
+            try {
+                // Fetch user bookings
+                const bookingsResponse = await fetch('http://localhost:5000/api/bookings', {
+                    headers: {
+                        'Authorization': `Bearer ${userInfo.token}`
+                    }
+                });
+                
+                if (bookingsResponse.ok) {
+                    const bookingsData = await bookingsResponse.json();
+                    
+                    // Update stats
+                    document.getElementById('total-bookings').textContent = bookingsData.length;
+                    
+                    // Count active bookings (confirmed but not completed)
+                    const activeBookings = bookingsData.filter(booking => 
+                        booking.bookingStatus === 'Confirmed' && 
+                        new Date(booking.returnDate) >= new Date()
+                    ).length;
+                    
+                    document.getElementById('active-bookings').textContent = activeBookings;
+                    
+                    // Update recent activity
+                    const recentActivityContainer = document.getElementById('recent-activity');
+                    
+                    if (bookingsData.length === 0) {
+                        recentActivityContainer.innerHTML = '<p class="text-gray-400">No recent activity</p>';
+                    } else {
+                        recentActivityContainer.innerHTML = '';
+                        
+                        // Sort bookings by date (newest first)
+                        bookingsData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                        
+                        // Show up to 5 most recent bookings
+                        const recentBookings = bookingsData.slice(0, 5);
+                        
+                        recentBookings.forEach(booking => {
+                            const activityItem = document.createElement('div');
+                            activityItem.className = 'flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-800';
+                            
+                            const date = new Date(booking.createdAt).toLocaleDateString();
+                            const time = new Date(booking.createdAt).toLocaleTimeString();
+                            
+                            activityItem.innerHTML = `
+                                <div class="bg-blue-500 bg-opacity-20 p-2 rounded-full">
+                                    <i class="fas fa-calendar-plus text-blue-500"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-medium">New Booking: ${booking.carId.brand} ${booking.carId.model}</p>
+                                    <p class="text-sm text-gray-400">Status: ${booking.bookingStatus}</p>
+                                    <p class="text-xs text-gray-500 mt-1">${date} at ${time}</p>
+                                </div>
+                            `;
+                            
+                            recentActivityContainer.appendChild(activityItem);
+                        });
+                    }
+                    
+                    // If user is a company, load company stats
+                    if (userRole === 'company' || userRole === 'admin') {
+                        await loadCompanyStats();
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading overview data:', error);
+            }
+        }
+        
+        // Load company stats
+        async function loadCompanyStats() {
+            try {
+                // Fetch company cars
+                const carsResponse = await fetch('http://localhost:5000/api/cars/company/cars', {
+                    headers: {
+                        'Authorization': `Bearer ${userInfo.token}`
+                    }
+                });
+                
+                if (carsResponse.ok) {
+                    const carsData = await carsResponse.json();
+                    
+                    // Update stats
+                    document.getElementById('total-cars').textContent = carsData.length;
+                    
+                    // Count available cars
+                    const availableCars = carsData.filter(car => car.isAvailable).length;
+                    document.getElementById('cars-available').textContent = `${availableCars} available`;
+                    
+                    // Calculate total revenue (simplified)
+                    let totalRevenue = 0;
+                    
+                    // Fetch company bookings
+                    const bookingsResponse = await fetch('http://localhost:5000/api/bookings/company', {
+                        headers: {
+                            'Authorization': `Bearer ${userInfo.token}`
+                        }
+                    });
+                    
+                    if (bookingsResponse.ok) {
+                        const bookingsData = await bookingsResponse.json();
+                        
+                        // Sum up total amount from completed bookings
+                        bookingsData.forEach(booking => {
+                            if (booking.bookingStatus === 'Completed' || booking.bookingStatus === 'Confirmed') {
+                                totalRevenue += booking.totalAmount;
+                            }
+                        });
+                        
+                        document.getElementById('total-revenue').textContent = `₹${totalRevenue.toLocaleString()}`;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading company stats:', error);
+            }
+        }
+        
+        // Load bookings data
+        async function loadBookingsData() {
+            try {
+                const bookingsContainer = document.getElementById('bookings-list');
+                bookingsContainer.innerHTML = '<p class="text-gray-400">Loading bookings...</p>';
+                
+                const response = await fetch('http://localhost:5000/api/bookings', {
+                    headers: {
+                        'Authorization': `Bearer ${userInfo.token}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const bookingsData = await response.json();
+                    
+                    if (bookingsData.length === 0) {
+                        bookingsContainer.innerHTML = `
+                            <div class="bg-gray-900 p-6 rounded-lg text-center">
+                                <i class="fas fa-calendar-times text-5xl text-gray-700 mb-4"></i>
+                                <h3 class="text-xl font-semibold mb-2">No Bookings Found</h3>
+                                <p class="text-gray-400 mb-4">You haven't made any bookings yet.</p>
+                                <a href="index.html" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition inline-block">
+                                    Book a Car Now
+                                </a>
+                            </div>
+                        `;
+                    } else {
+                        bookingsContainer.innerHTML = '';
+                        
+                        // Sort bookings by date (newest first)
+                        bookingsData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                        
+                        bookingsData.forEach(booking => {
+                            const bookingCard = document.createElement('div');
+                            bookingCard.className = 'bg-gray-900 p-6 rounded-lg';
+                            
+                            const pickupDate = new Date(booking.pickupDate).toLocaleDateString();
+                            const returnDate = new Date(booking.returnDate).toLocaleDateString();
+                            
+                            bookingCard.innerHTML = `
+                                <div class="md:flex justify-between items-start">
+                                    <div class="mb-4 md:mb-0">
+                                        <div class="flex items-center space-x-3 mb-2">
+                                            <h3 class="text-xl font-semibold">${booking.carId.brand} ${booking.carId.model}</h3>
+                                            <span class="bg-${getStatusColor(booking.bookingStatus)} text-white text-xs px-2 py-1 rounded">
+                                                ${booking.bookingStatus}
+                                            </span>
+                                        </div>
+                                        <p class="text-gray-400 text-sm mb-2">
+                                            <i class="fas fa-calendar-alt mr-1"></i> ${pickupDate} to ${returnDate}
+                                        </p>
+                                        <p class="text-gray-400 text-sm">
+                                            <i class="fas fa-map-marker-alt mr-1"></i> ${booking.pickupLocation} to ${booking.dropoffLocation}
+                                        </p>
+                                    </div>
+                                    <div class="flex flex-col items-end">
+                                        <p class="text-lg font-bold mb-2">₹${booking.totalAmount.toLocaleString()}</p>
+                                        <p class="text-sm text-gray-400 mb-4">Payment: ${booking.paymentStatus}</p>
+                                        <button class="text-green-500 hover:text-green-400 text-sm">View Details</button>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            bookingsContainer.appendChild(bookingCard);
+                        });
+                    }
+                } else {
+                    bookingsContainer.innerHTML = '<p class="text-red-500">Error loading bookings</p>';
+                }
+            } catch (error) {
+                console.error('Error loading bookings:', error);
+                document.getElementById('bookings-list').innerHTML = '<p class="text-red-500">Error loading bookings</p>';
+            }
+        }
+        
+        // Load company data
+        async function loadCompanyData() {
+            try {
+                const companyDetailsContainer = document.getElementById('company-details');
+                const noCompanyMessage = document.getElementById('no-company-message');
+                const addCompanyBtn = document.getElementById('add-company-btn');
+                
+                // Fetch company profile
+                const response = await fetch('http://localhost:5000/api/companies/profile', {
+                    headers: {
+                        'Authorization': `Bearer ${userInfo.token}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const companyData = await response.json();
+                    
+                    // Show company details, hide no company message
+                    companyDetailsContainer.classList.remove('hidden');
+                    noCompanyMessage.classList.add('hidden');
+                    addCompanyBtn.classList.add('hidden');
+                    
+                    // Format dates
+                    const startDate = new Date(companyData.startDate).toLocaleDateString();
+                    const endDate = new Date(companyData.endDate).toLocaleDateString();
+                    const licenseRenewalDate = new Date(companyData.licenseRenewalDate).toLocaleDateString();
+                    
+                    // Populate company details
+                    companyDetailsContainer.innerHTML = `
+                        <div class="bg-gray-900 p-6 rounded-lg mb-6">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <h3 class="text-xl font-semibold">${companyData.companyName}</h3>
+                                    <p class="text-gray-400 text-sm">
+                                        <i class="fas fa-check-circle ${companyData.isVerified ? 'text-green-500' : 'text-yellow-500'}"></i>
+                                        ${companyData.isVerified ? 'Verified Company' : 'Verification Pending'}
+                                    </p>
+                                </div>
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                                    Edit Details
+                                </button>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h4 class="font-semibold mb-3">Company Information</h4>
+                                    <div class="space-y-2 text-sm">
+                                        <p><span class="text-gray-400">Address:</span> ${companyData.companyAddress}</p>
+                                        <p><span class="text-gray-400">Email:</span> ${companyData.companyEmail}</p>
+                                        <p><span class="text-gray-400">Mobile:</span> ${companyData.companyMobile}</p>
+                                        <p><span class="text-gray-400">Website:</span> ${companyData.website || 'N/A'}</p>
+                                        <p><span class="text-gray-400">Employees:</span> ${companyData.numberOfEmployees || 'N/A'}</p>
+                                        <p><span class="text-gray-400">Postal Code:</span> ${companyData.postalCode || 'N/A'}</p>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="font-semibold mb-3">Owner Information</h4>
+                                    <div class="space-y-2 text-sm">
+                                        <p><span class="text-gray-400">Name:</span> ${companyData.ownerName}</p>
+                                        <p><span class="text-gray-400">Address:</span> ${companyData.ownerAddress}</p>
+                                        <p><span class="text-gray-400">Email:</span> ${companyData.ownerEmail}</p>
+                                        <p><span class="text-gray-400">Mobile:</span> ${companyData.ownerMobile}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 pt-6 border-t border-gray-800">
+                                <h4 class="font-semibold mb-3">License Information</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                                    <div>
+                                        <p class="text-gray-400">Trading License</p>
+                                        <p>${companyData.tradingLicense}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-400">License Renewal Date</p>
+                                        <p>${licenseRenewalDate}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-400">Contract Period</p>
+                                        <p>${startDate} to ${endDate}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-900 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-4">Company Performance</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="bg-gray-800 p-4 rounded-lg">
+                                    <h4 class="font-medium mb-2">Total Cars</h4>
+                                    <p class="text-2xl font-bold" id="company-total-cars">0</p>
+                                </div>
+                                <div class="bg-gray-800 p-4 rounded-lg">
+                                    <h4 class="font-medium mb-2">Total Bookings</h4>
+                                    <p class="text-2xl font-bold" id="company-total-bookings">0</p>
+                                </div>
+                                <div class="bg-gray-800 p-4 rounded-lg">
+                                    <h4 class="font-medium mb-2">Total Revenue</h4>
+                                    <p class="text-2xl font-bold" id="company-total-revenue">₹0</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Load company performance data
+                    await loadCompanyPerformance();
+                } else {
+                    // Show no company message, hide company details
+                    companyDetailsContainer.classList.add('hidden');
+                    noCompanyMessage.classList.remove('hidden');
+                    addCompanyBtn.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Error loading company data:', error);
+                
+                // Show error message
+                document.getElementById('company-details').classList.add('hidden');
+                document.getElementById('no-company-message').classList.remove('hidden');
+                document.getElementById('add-company-btn').classList.remove('hidden');
+            }
+        }
+        
+        // Load company performance data
+        async function loadCompanyPerformance() {
+            try {
+                // Fetch company cars
+                const carsResponse = await fetch('http://localhost:5000/api/cars/company/cars', {
+                    headers: {
+                        'Authorization': `Bearer ${userInfo.token}`
+                    }
+                });
+                
+                if (carsResponse.ok) {
+                    const carsData = await carsResponse.json();
+                    document.getElementById('company-total-cars').textContent = carsData.length;
+                    
+                    // Fetch company bookings
+                    const bookingsResponse = await fetch('http://localhost:5000/api/bookings/company', {
+                        headers: {
+                            'Authorization': `Bearer ${userInfo.token}`
+                        }
+                    });
+                    
+                    if (bookingsResponse.ok) {
+                        const bookingsData = await bookingsResponse.json();
+                        document.getElementById('company-total-bookings').textContent = bookingsData.length;
+                        
+                        // Calculate total revenue
+                        let totalRevenue = 0;
+                        bookingsData.forEach(booking => {
+                            if (booking.bookingStatus === 'Completed' || booking.bookingStatus === 'Confirmed') {
+                                totalRevenue += booking.totalAmount;
+                            }
+                        });
+                        
+                        document.getElementById('company-total-revenue').textContent = `₹${totalRevenue.toLocaleString()}`;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading company performance:', error);
+            }
+        }
+        
+        // Load cars data
+        async function loadCarsData() {
+            try {
+                const carsContainer = document.getElementById('cars-list');
+                carsContainer.innerHTML = '<p class="text-gray-400 col-span-full">Loading cars...</p>';
+                
+                const response = await fetch('http://localhost:5000/api/cars/company/cars', {
+                    headers: {
+                        'Authorization': `Bearer ${userInfo.token}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const carsData = await response.json();
+                    
+                    if (carsData.length === 0) {
+                        carsContainer.innerHTML = `
+                            <div class="bg-gray-900 p-6 rounded-lg text-center col-span-full">
+                                <i class="fas fa-car text-5xl text-gray-700 mb-4"></i>
+                                <h3 class="text-xl font-semibold mb-2">No Cars Found</h3>
+                                <p class="text-gray-400 mb-4">You haven't added any cars to your fleet yet.</p>
+                                <a href="addcar.html" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition inline-block">
+                                    Add a Car Now
+                                </a>
+                            </div>
+                        `;
+                    } else {
+                        carsContainer.innerHTML = '';
+                        
+                        carsData.forEach(car => {
+                            const carCard = document.createElement('div');
+                            carCard.className = 'bg-gray-900 rounded-lg overflow-hidden';
+                            
+                            // Use default image if no images available
+                            const carImage = car.images && car.images.length > 0 ? car.images[0] : 'img/car/default.jpg';
+                            
+                            carCard.innerHTML = `
+                                <img src="${carImage}" alt="${car.brand} ${car.model}" class="w-full h-48 object-cover">
+                                <div class="p-4">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h3 class="text-lg font-semibold">${car.brand} ${car.model}</h3>
+                                        <span class="bg-${car.isAvailable ? 'green' : 'red'}-500 text-white text-xs px-2 py-1 rounded">
+                                            ${car.isAvailable ? 'Available' : 'Booked'}
+                                        </span>
+                                    </div>
+                                    <p class="text-gray-400 text-sm mb-3">
+                                        <i class="fas fa-map-marker-alt mr-1"></i> ${car.location}
+                                    </p>
+                                    <div class="grid grid-cols-2 gap-2 text-sm text-gray-400 mb-3">
+                                        <p><i class="fas fa-car mr-1"></i> ${car.vehicleType}</p>
+                                        <p><i class="fas fa-cogs mr-1"></i> ${car.transmissionType}</p>
+                                        <p><i class="fas fa-gas-pump mr-1"></i> ${car.engineType}</p>
+                                        <p><i class="fas fa-users mr-1"></i> ${car.numberOfSeats} seats</p>
+                                    </div>
+                                    <div class="flex justify-between items-center pt-3 border-t border-gray-800">
+                                        <p class="font-bold">₹${car.dailyRate}/day</p>
+                                        <div class="space-x-2">
+                                            <button class="text-blue-500 hover:text-blue-400" data-car-id="${car._id}">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="text-red-500 hover:text-red-400" data-car-id="${car._id}">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            carsContainer.appendChild(carCard);
+                        });
+                        
+                        // Add event listeners for edit and delete buttons
+                        document.querySelectorAll('button[data-car-id]').forEach(button => {
+                            button.addEventListener('click', function() {
+                                const carId = this.getAttribute('data-car-id');
+                                if (this.innerHTML.includes('fa-edit')) {
+                                    // Edit car
+                                    alert(`Edit car with ID: ${carId}`);
+                                } else if (this.innerHTML.includes('fa-trash-alt')) {
+                                    // Delete car
+                                    if (confirm('Are you sure you want to delete this car?')) {
+                                        deleteCar(carId);
+                                    }
+                                }
+                            });
+                        });
+                    }
+                } else {
+                    carsContainer.innerHTML = '<p class="text-red-500 col-span-full">Error loading cars</p>';
+                }
+            } catch (error) {
+                console.error('Error loading cars:', error);
+                document.getElementById('cars-list').innerHTML = '<p class="text-red-500 col-span-full">Error loading cars</p>';
+            }
+        }
+        
+        // Delete car function
+        async function deleteCar(carId) {
+            try {
+                const response = await fetch(`http://localhost:5000/api/cars/${carId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${userInfo.token}`
+                    }
+                });
+                
+                if (response.ok) {
+                    alert('Car deleted successfully');
+                    loadCarsData(); // Reload cars list
+                } else {
+                    const error = await response.json();
+                    alert(`Error: ${error.message}`);
+                }
+            } catch (error) {
+                console.error('Error deleting car:', error);
+                alert('An error occurred. Please try again.');
+            }
+        }
+        
+        // Helper function for booking status colors
+        function getStatusColor(status) {
+            switch(status) {
+                case 'Confirmed': return 'green-600';
+                case 'Pending': return 'yellow-600';
+                case 'Cancelled': return 'red-600';
+                case 'Completed': return 'blue-600';
+                default: return 'gray-600';
+            }
+        }
+        
+        // Auth UI update function
+        function updateAuthUI() {
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            const loginLink = document.querySelector('header a[href="login.html"]');
+            
+            if (userInfo && userInfo.token) {
+                // User is logged in
+                if (loginLink) {
+                    // Replace login link with user dropdown
+                    const headerNav = loginLink.parentElement;
+                    loginLink.remove();
+                    
+                    // Create user dropdown
+                    const userDropdown = document.createElement('div');
+                    userDropdown.className = 'relative';
+                    userDropdown.innerHTML = `
+                        <button id="userDropdownBtn" class="flex items-center space-x-1 text-white hover:text-gray-300">
+                            <span>${userInfo.name}</span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="userDropdownMenu" class="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 z-50 hidden">
+                            <a href="profile.html" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">My Profile</a>
+                            <a href="dashboard.html" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">Dashboard</a>
+                            <a href="#" id="logoutBtn" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">Logout</a>
+                        </div>
+                    `;
+                    
+                    headerNav.appendChild(userDropdown);
+                    
+                    // Add event listeners for dropdown
+                    const dropdownBtn = document.getElementById('userDropdownBtn');
+                    const dropdownMenu = document.getElementById('userDropdownMenu');
+                    
+                    dropdownBtn.addEventListener('click', () => {
+                        dropdownMenu.classList.toggle('hidden');
+                    });
+                    
+                    // Close dropdown when clicking outside
+                    document.addEventListener('click', (e) => {
+                        if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                            dropdownMenu.classList.add('hidden');
+                        }
+                    });
+                    
+                    // Add logout functionality
+                    document.getElementById('logoutBtn').addEventListener('click', (e) => {
+                        e.preventDefault();
+                        localStorage.removeItem('userInfo');
+                        window.location.href = 'index.html';
+                    });
+                }
+            }
+        }
+    </script>
+</body>
+</html>

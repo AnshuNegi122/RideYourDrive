@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verification</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="max-w-4xl max-sm:max-w-lg mx-auto font-[sans-serif] p-6">
+    <div class="text-center mb-12 sm:mb-16">
+      <a href="javascript:void(0)">
+        <h1
+          class="mb-4 text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
+          RideYourDrive</h1>
+      </a>
+      <h4 class="text-gray-600 text-base mt-6">Register Your Company</h4>
+    </div>
+
+    <form action="#!" id="add-company-form">
+      <div class="grid sm:grid-cols-4 gap-6">
+        <div>
+          <label for="companyName" class="text-gray-600 text-sm mb-2 block">Company Name</label>
+          <input id="companyName" name="companyName" type="text"
+            class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+            placeholder="Enter Company Name" />
+        </div>
+        <div>
+          <label for="companyAddress" class="text-gray-600 text-sm mb-2 block">Company Address</label>
+          <input id="companyAddress" name="companyAddress" type="text"
+            class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+            placeholder="Enter Company Address" />
+        </div>
+        <div>
+          <label for="companyEmail" class="text-gray-600 text-sm mb-2 block">Company Email Id</label>
+          <input id="companyEmail" name="companyEmail" type="email"
+            class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+            placeholder="Enter Company Email" />
+        </div>
+        <div>
+          <label for="companyMobile" class="text-gray-600 text-sm mb-2 block">Company Mobile No.</label>
+          <input id="companyMobile" name="companyMobile" type="tel"
+            class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+            placeholder="Enter Company Mobile Number" />
+        </div>
+        <div>
+          <label for="ownerName" class="text-gray-600 text-sm mb-2 block">Owner Name</label>
+          <input id="ownerName" name="ownerName" type="text"
+            class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+            placeholder="Enter Owner Name" />
+        </div>
+        <div>
+          <label for="ownerAddress" class="text-gray-600 text-sm mb-2 block">Owner Address</label>
+          <input id="ownerAddress" name="ownerAddress" type="text"
+            class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+            placeholder="Enter Owner Address" />
+        </div>
+        <div>
+          <label for="ownerEmail" class="text-gray-600 text-sm mb-2 block">Owner Email Id</label>
+          <input id="ownerEmail" name="ownerEmail" type="email"
+            class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+            placeholder="Enter Owner Email" />
+        </div>
+        <div>
+          <label for="ownerMobile" class="text-gray-600 text-sm mb-2 block">Owner Mobile No.</label>
+          <input id="ownerMobile" name="ownerMobile" type="tel"
+            class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+            placeholder="Enter Owner Mobile Number" />
+        </div>
+        <div>
+          <label for="tradingLicense" class="text-gray-600 text-sm mb-2 block">Trading License</label>
+          <input id="tradingLicense" name="tradingLicense" type="text"
+            class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+            placeholder="Enter Trading License" />
+        </div>
+        <div>
+          <label for="licenseRenewalDate" class="text-gray-600 text-sm mb-2 block">License Renewal Date</label>
+          <input datepicker id="licenseRenewalDate" name="licenseRenewalDate" type="text"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+            placeholder="Select License Renewal Date">
+        </div>
+        <div>
+          <label for="startDate" class="text-gray-600 text-sm mb-2 block">Start Date</label>
+          <input datepicker id="startDate" name="startDate" type="text"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+            placeholder="Select Start Date">
+        </div>
+        <div>
+          <label for="endDate" class="text-gray-600 text-sm mb-2 block">End Date</label>
+          <input datepicker id="endDate" name="endDate" type="text"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+            placeholder="Select End Date">
+        </div>
+        <div>
+          <label for="website" class="text-gray-600 text-sm mb-2 block">Website</label>
+          <input id="website" name="website" type="text"
+            class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+            placeholder="Enter Website" />
+        </div>
+        <div>
+          <label for="numberOfEmployees" class="text-gray-600 text-sm mb-2 block">No. of Employees</label>
+          <input id="numberOfEmployees" name="numberOfEmployees" type="number"
+            class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+            placeholder="Enter No. of Employees" />
+        </div>
+        <div>
+          <label for="postalCode" class="text-gray-600 text-sm mb-2 block">Postal Code</label>
+          <input id="postalCode" name="postalCode" type="number"
+            class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+            placeholder="Enter Postal Code" />
+        </div>
+      </div>
+
+      <div class="mt-8">
+        <button type="submit"
+          class="mx-auto block py-3 px-7 text-md tracking-wider rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
+          Register Company
+        </button>
+      </div>
+    </form>
+
+  </div>
+
+  <script src="js/add-company.js"></script>
+</body>
+
+</html>
