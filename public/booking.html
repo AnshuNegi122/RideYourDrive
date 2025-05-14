@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Car Booking</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-white">
+
+  <!-- Car Booking Section -->
+  <div class="max-w-3xl mx-auto my-10 bg-gray-700 rounded-lg shadow-lg px-8 py-8">
+    
+    <!-- Title -->
+    <h2 class="text-3xl font-bold text-center mb-8">Book Your Car</h2>
+    
+    <!-- Form -->
+    <form action="#!" id="booking-form" class="w-full max-w-2xl mx-auto">
+      <!-- Pick-up Location -->
+      <div class="mb-4">
+        <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="pickUpLocation">
+          Pick-up Location
+        </label>
+        <input
+          class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+          id="pickUpLocation" type="text" placeholder="Enter pick-up location">
+      </div>
+
+      <!-- Drop-off Location -->
+      <div class="mb-4">
+        <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="dropOffLocation">
+          Drop-off Location
+        </label>
+        <input
+          class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+          id="dropOffLocation" type="text" placeholder="Enter drop-off location">
+      </div>
+
+      <!-- Dates -->
+      <div class="flex flex-wrap -mx-3 mb-4">
+        <div class="w-full md:w-1/2 px-3 mb-4 md:mb-0">
+          <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="pickUpDate">
+            Pick-up Date
+          </label>
+          <input
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+            id="pickUpDate" type="date">
+        </div>
+        <div class="w-full md:w-1/2 px-3">
+          <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="returnDate">
+            Return Date
+          </label>
+          <input
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+            id="returnDate" type="date">
+        </div>
+      </div>
+
+      <!-- Booking Summary -->
+      <div id="booking-summary" class="mt-6 p-4 bg-gray-800 rounded-lg">
+        <h3 class="font-semibold mb-2">Booking Summary</h3>
+        <div id="car-details" class="text-sm text-gray-300 mb-2">
+          <p>Car: <span id="summary-car">Loading...</span></p>
+          <p>Daily Rate: <span id="summary-rate">Loading...</span></p>
+        </div>
+        <div class="border-t border-gray-600 my-2 pt-2">
+          <p class="flex justify-between"><span>Rental Period:</span> <span id="summary-days">0 days</span></p>
+          <p class="flex justify-between"><span>Subtotal:</span> <span id="summary-subtotal">₹0</span></p>
+          <p class="flex justify-between"><span>Taxes & Fees:</span> <span id="summary-taxes">₹0</span></p>
+          <p class="flex justify-between font-semibold mt-2"><span>Total:</span> <span id="summary-total">₹0</span></p>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex justify-between mt-6">
+        <button
+          class="closeBookingModalBtn w-full m-3 p-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+          Cancel
+        </button>
+        <button type="submit"
+          class="w-full m-3 p-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+          Book Now
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script src="js/booking-modal.js"></script>
+  <script src="js/booking-summary.js"></script>
+
+</body>
+</html>
