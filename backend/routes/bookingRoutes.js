@@ -17,8 +17,18 @@ router.route('/')
   .post(protect, createBooking)
   .get(protect, getUserBookings);
 
+
+// User routes
+router.route('/').post(protect, createBooking);
+router.route('/').get(protect, getUserBookings);
+router.route('/:id').get(protect, getBookingById);
+
+
 router.get('/admin', protect, admin, getAllBookings);
 router.get('/company', protect, company, getCompanyBookings);
+
+// Company routes - Make sure protect middleware runs before company middleware
+router.route('/company').get(protect, company, getCompanyBookings);
 
 router.route('/:id')
   .get(protect, getBookingById);

@@ -1,92 +1,366 @@
+booking.html - Create this file in your frontend directory
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Car Booking</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Car - RideYourDrive</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body class="bg-gray-100 text-white">
-
-  <!-- Car Booking Section -->
-  <div class="max-w-3xl mx-auto my-10 bg-gray-700 rounded-lg shadow-lg px-8 py-8">
-    
-    <!-- Title -->
-    <h2 class="text-3xl font-bold text-center mb-8">Book Your Car</h2>
-    
-    <!-- Form -->
-    <form action="#!" id="booking-form" class="w-full max-w-2xl mx-auto">
-      <!-- Pick-up Location -->
-      <div class="mb-4">
-        <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="pickUpLocation">
-          Pick-up Location
-        </label>
-        <input
-          class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-          id="pickUpLocation" type="text" placeholder="Enter pick-up location">
-      </div>
-
-      <!-- Drop-off Location -->
-      <div class="mb-4">
-        <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="dropOffLocation">
-          Drop-off Location
-        </label>
-        <input
-          class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-          id="dropOffLocation" type="text" placeholder="Enter drop-off location">
-      </div>
-
-      <!-- Dates -->
-      <div class="flex flex-wrap -mx-3 mb-4">
-        <div class="w-full md:w-1/2 px-3 mb-4 md:mb-0">
-          <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="pickUpDate">
-            Pick-up Date
-          </label>
-          <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-            id="pickUpDate" type="date">
+<body class="bg-gray-800 text-white">
+    <!-- Navigation Bar -->
+    <header class="bg-gray-900 px-8 py-6 flex justify-between items-center">
+        <div class="text-lg font-semibold">
+            <a href="index.html">RideYourDrive</a>
         </div>
-        <div class="w-full md:w-1/2 px-3">
-          <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="returnDate">
-            Return Date
-          </label>
-          <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-            id="returnDate" type="date">
+        <nav class="space-x-8 hidden md:flex">
+            <a href="index.html" class="hover:text-gray-300 text-sm font-semibold leading-6">Home</a>
+            <a href="#" class="hover:text-gray-300 text-sm font-semibold leading-6">Cars</a>
+            <a href="#" class="hover:text-gray-300 text-sm font-semibold leading-6">About</a>
+            <a href="#" class="hover:text-gray-300 text-sm font-semibold leading-6">Contact</a>
+        </nav>
+        <a href="login.html" class="text-white hover:text-gray-300">Log in →</a>
+    </header>
+
+    <!-- Booking Section -->
+    <section class="py-16 px-4 md:px-12">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl font-bold mb-8">Book Your Car</h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Car Details -->
+                <div class="md:col-span-1">
+                    <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg mb-6">
+                        <div id="car-image" class="h-48 bg-gray-800 flex items-center justify-center">
+                            <i class="fas fa-car text-4xl text-gray-600"></i>
+                        </div>
+                        <div class="p-6">
+                            <h2 id="car-title" class="text-xl font-semibold mb-2">Loading car details...</h2>
+                            <p id="car-location" class="text-gray-400 text-sm mb-4"><i class="fas fa-map-marker-alt"></i> Loading...</p>
+                            <div class="flex items-center space-x-4 text-gray-400 text-sm mb-4 border-t border-gray-700 pt-3">
+                                <div>
+                                    <div class="flex items-center space-x-1 p-3">
+                                        <span id="car-type"><i class="fas fa-tachometer-alt"></i> Loading...</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1 p-3">
+                                        <span id="car-transmission"><i class="fas fa-cogs"></i> Loading...</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex items-center space-x-1 p-3">
+                                        <span id="car-engine"><i class="fas fa-gas-pump"></i> Loading...</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1 p-3">
+                                        <span id="car-seats"><i class="fas fa-users"></i> Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-t border-gray-700 pt-3">
+                                <p class="text-lg font-bold">Daily Rate: <span id="car-rate" class="text-green-400">Loading...</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Booking Form -->
+                <div class="md:col-span-2">
+                    <div class="bg-gray-900 rounded-lg shadow-lg p-6">
+                        <h2 class="text-xl font-semibold mb-4">Booking Details</h2>
+                        
+                        <form id="booking-form">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-gray-400 text-sm mb-1">Pick-up Location</label>
+                                    <input type="text" id="pickupLocation" class="w-full bg-gray-800 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-400 text-sm mb-1">Drop-off Location</label>
+                                    <input type="text" id="dropoffLocation" class="w-full bg-gray-800 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-400 text-sm mb-1">Pick-up Date</label>
+                                    <input type="date" id="pickupDate" class="w-full bg-gray-800 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-400 text-sm mb-1">Return Date</label>
+                                    <input type="date" id="returnDate" class="w-full bg-gray-800 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-800 p-4 rounded-lg mb-6">
+                                <h3 class="font-semibold mb-2">Booking Summary</h3>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between">
+                                        <span>Rental Period:</span>
+                                        <span id="summary-days">0 days</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Daily Rate:</span>
+                                        <span id="summary-rate">₹0</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Subtotal:</span>
+                                        <span id="summary-subtotal">₹0</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Taxes & Fees (18%):</span>
+                                        <span id="summary-taxes">₹0</span>
+                                    </div>
+                                    <div class="flex justify-between font-semibold text-base pt-2 border-t border-gray-700">
+                                        <span>Total:</span>
+                                        <span id="summary-total">₹0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition">
+                                Confirm Booking
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <!-- Booking Summary -->
-      <div id="booking-summary" class="mt-6 p-4 bg-gray-800 rounded-lg">
-        <h3 class="font-semibold mb-2">Booking Summary</h3>
-        <div id="car-details" class="text-sm text-gray-300 mb-2">
-          <p>Car: <span id="summary-car">Loading...</span></p>
-          <p>Daily Rate: <span id="summary-rate">Loading...</span></p>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <p>&copy; 2024 RideYourDrive. All rights reserved.</p>
         </div>
-        <div class="border-t border-gray-600 my-2 pt-2">
-          <p class="flex justify-between"><span>Rental Period:</span> <span id="summary-days">0 days</span></p>
-          <p class="flex justify-between"><span>Subtotal:</span> <span id="summary-subtotal">₹0</span></p>
-          <p class="flex justify-between"><span>Taxes & Fees:</span> <span id="summary-taxes">₹0</span></p>
-          <p class="flex justify-between font-semibold mt-2"><span>Total:</span> <span id="summary-total">₹0</span></p>
-        </div>
-      </div>
+    </footer>
 
-      <!-- Buttons -->
-      <div class="flex justify-between mt-6">
-        <button
-          class="closeBookingModalBtn w-full m-3 p-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
-          Cancel
-        </button>
-        <button type="submit"
-          class="w-full m-3 p-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
-          Book Now
-        </button>
-      </div>
-    </form>
-  </div>
-
-  <script src="js/booking-modal.js"></script>
-  <script src="js/booking-summary.js"></script>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Check if user is logged in
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            
+            if (!userInfo || !userInfo.token) {
+                alert('Please login to book a car');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Check if user is verified
+            try {
+                const verificationResponse = await fetch('http://localhost:5000/api/users/verification-status', {
+                    headers: {
+                        'Authorization': `Bearer ${userInfo.token}`
+                    }
+                });
+                
+                const verificationData = await verificationResponse.json();
+                
+                if (!verificationResponse.ok || !verificationData.isVerified) {
+                    alert('You need to verify your account before booking a car');
+                    window.location.href = 'index.html';
+                    return;
+                }
+            } catch (error) {
+                console.error('Error checking verification status:', error);
+                alert('Error checking verification status. Please try again.');
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // Get car ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const carId = urlParams.get('carId');
+            
+            if (!carId) {
+                alert('No car selected');
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // Load car details
+            try {
+                const response = await fetch(`http://localhost:5000/api/cars/${carId}`);
+                const car = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(car.message || 'Failed to load car details');
+                }
+                
+                // Update car details in the UI
+                document.getElementById('car-title').textContent = `${car.brand} ${car.model} (${car.modelYear})`;
+                document.getElementById('car-location').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${car.location}`;
+                document.getElementById('car-type').innerHTML = `<i class="fas fa-tachometer-alt"></i> ${car.vehicleType}`;
+                document.getElementById('car-transmission').innerHTML = `<i class="fas fa-cogs"></i> ${car.transmissionType || 'Automatic'}`;
+                document.getElementById('car-engine').innerHTML = `<i class="fas fa-gas-pump"></i> ${car.engineType}`;
+                document.getElementById('car-seats').innerHTML = `<i class="fas fa-users"></i> ${car.numberOfSeats} seats`;
+                document.getElementById('car-rate').textContent = `₹${car.dailyRate}/day`;
+                document.getElementById('summary-rate').textContent = `₹${car.dailyRate}`;
+                
+                // Set car image if available
+                if (car.images && car.images.length > 0) {
+                    document.getElementById('car-image').innerHTML = `
+                        <img src="${car.images[0]}" alt="${car.brand} ${car.model}" class="w-full h-full object-cover">
+                    `;
+                }
+                
+                // Store car data for calculations
+                document.getElementById('booking-form').setAttribute('data-car-id', car._id);
+                document.getElementById('booking-form').setAttribute('data-daily-rate', car.dailyRate);
+                
+                // Set minimum dates for date inputs
+                const today = new Date();
+                const tomorrow = new Date(today);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                
+                const formatDate = (date) => {
+                    return date.toISOString().split('T')[0];
+                };
+                
+                const pickupDateInput = document.getElementById('pickupDate');
+                const returnDateInput = document.getElementById('returnDate');
+                
+                pickupDateInput.min = formatDate(today);
+                returnDateInput.min = formatDate(tomorrow);
+                
+                // Set default values
+                pickupDateInput.value = formatDate(today);
+                returnDateInput.value = formatDate(tomorrow);
+                
+                // Update booking summary
+                updateBookingSummary();
+                
+                // Add event listeners for date changes
+                pickupDateInput.addEventListener('change', updateBookingSummary);
+                returnDateInput.addEventListener('change', updateBookingSummary);
+            } catch (error) {
+                console.error('Error loading car details:', error);
+                alert('Error loading car details. Please try again.');
+            }
+            
+            // Handle booking form submission
+            document.getElementById('booking-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const form = e.target;
+                const carId = form.getAttribute('data-car-id');
+                const totalAmount = parseFloat(document.getElementById('summary-total').textContent.replace('₹', '').replace(',', ''));
+                
+                const bookingData = {
+                    carId,
+                    pickupLocation: document.getElementById('pickupLocation').value,
+                    dropoffLocation: document.getElementById('dropoffLocation').value,
+                    pickupDate: document.getElementById('pickupDate').value,
+                    returnDate: document.getElementById('returnDate').value,
+                    totalAmount
+                };
+                
+                try {
+                    const response = await fetch('http://localhost:5000/api/bookings', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${userInfo.token}`
+                        },
+                        body: JSON.stringify(bookingData)
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        alert('Booking successful!');
+                        window.location.href = 'dashboard.html#bookings';
+                    } else {
+                        alert(`Booking failed: ${data.message}`);
+                    }
+                } catch (error) {
+                    console.error('Error creating booking:', error);
+                    alert('An error occurred. Please try again.');
+                }
+            });
+            
+            // Function to update booking summary
+            function updateBookingSummary() {
+                const pickupDate = new Date(document.getElementById('pickupDate').value);
+                const returnDate = new Date(document.getElementById('returnDate').value);
+                const dailyRate = parseFloat(document.getElementById('booking-form').getAttribute('data-daily-rate'));
+                
+                // Calculate number of days
+                const timeDiff = returnDate.getTime() - pickupDate.getTime();
+                const days = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                
+                if (days <= 0) {
+                    document.getElementById('summary-days').textContent = 'Invalid dates';
+                    document.getElementById('summary-subtotal').textContent = '₹0';
+                    document.getElementById('summary-taxes').textContent = '₹0';
+                    document.getElementById('summary-total').textContent = '₹0';
+                    return;
+                }
+                
+                // Calculate costs
+                const subtotal = days * dailyRate;
+                const taxRate = 0.18; // 18% GST
+                const taxes = subtotal * taxRate;
+                const total = subtotal + taxes;
+                
+                // Update summary
+                document.getElementById('summary-days').textContent = `${days} day${days > 1 ? 's' : ''}`;
+                document.getElementById('summary-subtotal').textContent = `₹${subtotal.toLocaleString()}`;
+                document.getElementById('summary-taxes').textContent = `₹${taxes.toLocaleString()}`;
+                document.getElementById('summary-total').textContent = `₹${total.toLocaleString()}`;
+            }
+            
+            // Update auth UI
+            updateAuthUI();
+        });
+        
+        // Function to update UI based on authentication status
+        function updateAuthUI() {
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            const loginLink = document.querySelector('header a[href="login.html"]');
+            
+            if (userInfo && userInfo.token && loginLink) {
+                // User is logged in
+                // Replace login link with user dropdown
+                const headerNav = loginLink.parentElement;
+                loginLink.remove();
+                
+                // Create user dropdown
+                const userDropdown = document.createElement('div');
+                userDropdown.className = 'relative';
+                userDropdown.innerHTML = `
+                    <button id="userDropdownBtn" class="flex items-center space-x-1 text-white hover:text-gray-300">
+                        <span>${userInfo.name}</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div id="userDropdownMenu" class="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 z-50 hidden">
+                        <a href="profile.html" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">My Profile</a>
+                        <a href="dashboard.html" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">Dashboard</a>
+                        <a href="#" id="logoutBtn" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">Logout</a>
+                    </div>
+                `;
+                
+                headerNav.appendChild(userDropdown);
+                
+                // Add event listeners for dropdown
+                const dropdownBtn = document.getElementById('userDropdownBtn');
+                const dropdownMenu = document.getElementById('userDropdownMenu');
+                
+                dropdownBtn.addEventListener('click', () => {
+                    dropdownMenu.classList.toggle('hidden');
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                        dropdownMenu.classList.add('hidden');
+                    }
+                });
+                
+                // Add logout functionality
+                document.getElementById('logoutBtn').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    localStorage.removeItem('userInfo');
+                    window.location.href = 'index.html';
+                });
+            }
+        }
+    </script>
 </body>
 </html>
