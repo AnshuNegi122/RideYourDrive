@@ -3,63 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search Vehicles - Vehicle Rental</title>
+  <title>Search Vehicles - VehicleRental</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .vehicle-card {
+      transition: all 0.3s ease;
+    }
+    
+    .vehicle-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+  </style>
 </head>
-<body class="bg-gray-100 min-h-screen">
+<body class="bg-gray-50 min-h-screen">
   <%- include('partials/header') %>
   
   <main class="container mx-auto px-4 py-12">
+    <!-- Page Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-2">Find Your Perfect Vehicle</h1>
+      <p class="text-gray-600">Browse our extensive collection of premium cars and bikes</p>
+    </div>
+    
     <!-- Search Form -->
-    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-      <h2 class="text-xl font-bold mb-4">Find Your Perfect Vehicle</h2>
-      
+    <div class="bg-white rounded-xl shadow-md p-6 mb-8">
       <form action="/search" method="GET" class="grid grid-cols-1 md:grid-cols-5 gap-4">
         <div class="md:col-span-1">
-          <label for="pickupLocation" class="block text-gray-700 mb-2">Pick Up Location</label>
-          <select id="pickupLocation" name="pickupLocation" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <% locations.forEach(location => { %>
-              <option value="<%= location._id %>" <%= selectedPickup === location._id.toString() ? 'selected' : '' %>><%= location.name %></option>
-            <% }); %>
-          </select>
+          <label for="pickupLocation" class="block text-gray-700 font-medium mb-2">Pick Up Location</label>
+          <div class="relative">
+            <select id="pickupLocation" name="pickupLocation" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none">
+              <% locations.forEach(location => { %>
+                <option value="<%= location._id %>" <%= selectedPickup === location._id.toString() ? 'selected' : '' %>><%= location.name %></option>
+              <% }); %>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+          </div>
         </div>
         
         <div class="md:col-span-1">
-          <label for="dropoffLocation" class="block text-gray-700 mb-2">Drop Off Location</label>
-          <select id="dropoffLocation" name="dropoffLocation" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <% locations.forEach(location => { %>
-              <option value="<%= location._id %>" <%= selectedDropoff === location._id.toString() ? 'selected' : '' %>><%= location.name %></option>
-            <% }); %>
-          </select>
+          <label for="dropoffLocation" class="block text-gray-700 font-medium mb-2">Drop Off Location</label>
+          <div class="relative">
+            <select id="dropoffLocation" name="dropoffLocation" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none">
+              <% locations.forEach(location => { %>
+                <option value="<%= location._id %>" <%= selectedDropoff === location._id.toString() ? 'selected' : '' %>><%= location.name %></option>
+              <% }); %>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+          </div>
         </div>
         
         <div class="md:col-span-1">
-          <label for="startDate" class="block text-gray-700 mb-2">Pick Up Date</label>
-          <input type="date" id="startDate" name="startDate" value="<%= startDate %>" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <label for="startDate" class="block text-gray-700 font-medium mb-2">Pick Up Date</label>
+          <div class="relative">
+            <input type="date" id="startDate" name="startDate" value="<%= startDate %>" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+              <i class="fas fa-calendar"></i>
+            </div>
+          </div>
         </div>
         
         <div class="md:col-span-1">
-          <label for="endDate" class="block text-gray-700 mb-2">Return Date</label>
-          <input type="date" id="endDate" name="endDate" value="<%= endDate %>" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <label for="endDate" class="block text-gray-700 font-medium mb-2">Return Date</label>
+          <div class="relative">
+            <input type="date" id="endDate" name="endDate" value="<%= endDate %>" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+              <i class="fas fa-calendar"></i>
+            </div>
+          </div>
         </div>
         
         <div class="md:col-span-1">
-          <label class="block text-gray-700 mb-2">&nbsp;</label>
-          <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-            </svg>
+          <label class="block text-gray-700 font-medium mb-2">&nbsp;</label>
+          <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-3 px-4 rounded-lg flex items-center justify-center font-medium transition duration-300 shadow-md">
+            <i class="fas fa-search mr-2"></i>
             Search
           </button>
         </div>
       </form>
     </div>
     
-    <!-- Filters -->
-    <div class="flex flex-col md:flex-row gap-8">
-      <div class="md:w-1/4">
-        <div class="bg-white rounded-lg shadow-md p-6 sticky top-4">
-          <h3 class="text-lg font-bold mb-4">Filters</h3>
+    <!-- Filters and Results -->
+    <div class="flex flex-col lg:flex-row gap-8">
+      <div class="lg:w-1/4">
+        <div class="bg-white rounded-xl shadow-md p-6 sticky top-24">
+          <h3 class="text-xl font-bold mb-6 flex items-center">
+            <i class="fas fa-filter mr-2 text-blue-600"></i>
+            Filters
+          </h3>
           
           <form action="/search" method="GET" id="filterForm">
             <!-- Hidden fields to preserve search params -->
@@ -68,42 +110,42 @@
             <input type="hidden" name="startDate" value="<%= startDate %>">
             <input type="hidden" name="endDate" value="<%= endDate %>">
             
-            <div class="mb-4">
-              <h4 class="font-semibold mb-2">Vehicle Type</h4>
+            <div class="mb-6">
+              <h4 class="font-semibold mb-3 text-gray-800">Vehicle Type</h4>
               <div class="space-y-2">
-                <label class="flex items-center">
-                  <input type="radio" name="type" value="all" <%= !type || type === 'all' ? 'checked' : '' %> class="mr-2" onchange="document.getElementById('filterForm').submit()">
-                  <span>All</span>
+                <label class="flex items-center p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <input type="radio" name="type" value="all" <%= !type || type === 'all' ? 'checked' : '' %> class="mr-3 text-blue-600 focus:ring-blue-500" onchange="document.getElementById('filterForm').submit()">
+                  <span>All Vehicles</span>
                 </label>
-                <label class="flex items-center">
-                  <input type="radio" name="type" value="car" <%= type === 'car' ? 'checked' : '' %> class="mr-2" onchange="document.getElementById('filterForm').submit()">
-                  <span>Cars</span>
+                <label class="flex items-center p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <input type="radio" name="type" value="car" <%= type === 'car' ? 'checked' : '' %> class="mr-3 text-blue-600 focus:ring-blue-500" onchange="document.getElementById('filterForm').submit()">
+                  <span>Cars Only</span>
                 </label>
-                <label class="flex items-center">
-                  <input type="radio" name="type" value="bike" <%= type === 'bike' ? 'checked' : '' %> class="mr-2" onchange="document.getElementById('filterForm').submit()">
-                  <span>Bikes</span>
+                <label class="flex items-center p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <input type="radio" name="type" value="bike" <%= type === 'bike' ? 'checked' : '' %> class="mr-3 text-blue-600 focus:ring-blue-500" onchange="document.getElementById('filterForm').submit()">
+                  <span>Bikes Only</span>
                 </label>
               </div>
             </div>
             
-            <div class="mb-4">
-              <h4 class="font-semibold mb-2">Price Range</h4>
-              <div class="space-y-2">
-                <div class="flex items-center justify-between">
+            <div class="mb-6">
+              <h4 class="font-semibold mb-3 text-gray-800">Price Range</h4>
+              <div class="space-y-3">
+                <div class="flex items-center justify-between text-sm text-gray-600">
                   <span>$<span id="minPriceDisplay"><%= minPrice %></span></span>
                   <span>$<span id="maxPriceDisplay"><%= maxPrice %></span></span>
                 </div>
                 <div class="flex space-x-4">
-                  <input type="range" id="minPrice" name="minPrice" min="0" max="500" value="<%= minPrice %>" class="w-1/2" oninput="updatePriceRange()">
-                  <input type="range" id="maxPrice" name="maxPrice" min="0" max="500" value="<%= maxPrice %>" class="w-1/2" oninput="updatePriceRange()">
+                  <input type="range" id="minPrice" name="minPrice" min="0" max="500" value="<%= minPrice %>" class="w-1/2 accent-blue-600" oninput="updatePriceRange()">
+                  <input type="range" id="maxPrice" name="maxPrice" min="0" max="500" value="<%= maxPrice %>" class="w-1/2 accent-blue-600" oninput="updatePriceRange()">
                 </div>
-                <button type="submit" class="mt-2 w-full bg-gray-200 hover:bg-gray-300 text-gray-800 py-1 px-3 rounded text-sm">Apply</button>
+                <button type="submit" class="mt-2 w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg text-sm font-medium transition duration-300">Apply Price Filter</button>
               </div>
             </div>
             
-            <div class="mb-4">
-              <h4 class="font-semibold mb-2">Sort By</h4>
-              <select name="sort" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="document.getElementById('filterForm').submit()">
+            <div class="mb-6">
+              <h4 class="font-semibold mb-3 text-gray-800">Sort By</h4>
+              <select name="sort" class="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="document.getElementById('filterForm').submit()">
                 <option value="price_asc" <%= sort === 'price_asc' ? 'selected' : '' %>>Price: Low to High</option>
                 <option value="price_desc" <%= sort === 'price_desc' ? 'selected' : '' %>>Price: High to Low</option>
                 <option value="newest" <%= sort === 'newest' ? 'selected' : '' %>>Newest First</option>
@@ -114,14 +156,17 @@
       </div>
       
       <!-- Search Results -->
-      <div class="md:w-3/4">
-        <h2 class="text-2xl font-bold mb-6">Available Vehicles</h2>
+      <div class="lg:w-3/4">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold">Available Vehicles</h2>
+          <p class="text-gray-600"><%= vehicles.length %> vehicles found</p>
+        </div>
         
         <% if (vehicles.length === 0) { %>
-          <div class="bg-white rounded-lg shadow-md p-8 text-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+          <div class="bg-white rounded-xl shadow-md p-8 text-center">
+            <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 mx-auto mb-4">
+              <i class="fas fa-search text-3xl"></i>
+            </div>
             <h3 class="text-xl font-bold mb-2">No Vehicles Found</h3>
             <p class="text-gray-600 mb-4">We couldn't find any vehicles matching your search criteria.</p>
             <p class="text-gray-600">Try adjusting your filters or search for a different location or date.</p>
@@ -129,25 +174,30 @@
         <% } else { %>
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <% vehicles.forEach(vehicle => { %>
-              <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <div class="vehicle-card bg-white rounded-xl shadow-md overflow-hidden">
                 <div class="md:flex">
-                  <div class="md:w-2/5 h-48 md:h-auto bg-gray-200">
+                  <div class="md:w-2/5 h-48 md:h-auto bg-gray-200 relative">
                     <% if (vehicle.images && vehicle.images.length > 0) { %>
                       <img src="/<%= vehicle.images[0] %>" alt="<%= vehicle.make %> <%= vehicle.model %>" class="w-full h-full object-cover">
                     <% } else { %>
                       <div class="w-full h-full flex items-center justify-center text-gray-500">No image</div>
                     <% } %>
+                    <div class="absolute top-4 right-4">
+                      <span class="bg-blue-600 text-white text-xs font-semibold px-2.5 py-1.5 rounded-full"><%= vehicle.type.charAt(0).toUpperCase() + vehicle.type.slice(1) %></span>
+                    </div>
                   </div>
                   <div class="md:w-3/5 p-6">
-                    <div class="flex justify-between items-start mb-2">
-                      <h3 class="text-lg font-bold"><%= vehicle.make %> <%= vehicle.model %></h3>
-                      <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded"><%= vehicle.type.charAt(0).toUpperCase() + vehicle.type.slice(1) %></span>
-                    </div>
-                    <p class="text-gray-600 mb-2"><%= vehicle.year %> • <%= vehicle.companyId.name %></p>
+                    <h3 class="text-xl font-bold mb-2"><%= vehicle.make %> <%= vehicle.model %></h3>
+                    <p class="text-gray-600 mb-2 flex items-center">
+                      <i class="fas fa-calendar-alt mr-2 text-blue-600"></i>
+                      <%= vehicle.year %> • <%= vehicle.companyId.name %>
+                    </p>
                     <p class="text-gray-700 mb-4 line-clamp-2"><%= vehicle.description %></p>
-                    <div class="flex justify-between items-center">
-                      <span class="text-lg font-bold text-blue-600">$<%= vehicle.price %>/day</span>
-                      <a href="/vehicles/<%= vehicle._id %>?pickupLocation=<%= selectedPickup %>&dropoffLocation=<%= selectedDropoff %>&startDate=<%= startDate %>&endDate=<%= endDate %>" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">View Details</a>
+                    <div class="border-t border-gray-100 pt-4 mt-auto">
+                      <div class="flex justify-between items-center">
+                        <span class="text-xl font-bold text-blue-600">$<%= vehicle.price %><span class="text-sm font-normal text-gray-600">/day</span></span>
+                        <a href="/vehicles/<%= vehicle._id %>?pickupLocation=<%= selectedPickup %>&dropoffLocation=<%= selectedDropoff %>&startDate=<%= startDate %>&endDate=<%= endDate %>" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-2 rounded-lg transition duration-300 shadow-md">View Details</a>
+                      </div>
                     </div>
                   </div>
                 </div>

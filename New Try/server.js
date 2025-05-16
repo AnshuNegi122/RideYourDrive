@@ -209,9 +209,9 @@ app.post("/login", async (req, res) => {
 
     req.session.userId = user._id;
 
-    // Redirect renters to search page, owners to dashboard
+    // Redirect renters to homepage, owners to dashboard
     if (user.userType === "renter") {
-      res.redirect("/search");
+      res.redirect("/");
     } else {
       res.redirect("/dashboard");
     }

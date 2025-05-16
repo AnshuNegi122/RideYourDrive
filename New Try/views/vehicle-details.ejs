@@ -3,14 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= vehicle.make %> <%= vehicle.model %> - Vehicle Rental</title>
+  <title><%= vehicle.make %> <%= vehicle.model %> - VehicleRental</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .thumbnail-active {
+      border-color: #3b82f6;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 min-h-screen">
+<body class="bg-gray-50 min-h-screen">
   <%- include('partials/header') %>
   
   <main class="container mx-auto px-4 py-12">
-    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
       <!-- Vehicle Images -->
       <div class="relative h-96 bg-gray-200">
         <% if (vehicle.images && vehicle.images.length > 0) { %>
@@ -21,7 +33,7 @@
           <% if (vehicle.images.length > 1) { %>
             <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
               <% vehicle.images.forEach((image, index) => { %>
-                <button onclick="changeImage('<%= image %>', this)" class="h-16 w-16 border-2 <%= index === 0 ? 'border-blue-500' : 'border-white' %> rounded overflow-hidden">
+                <button onclick="changeImage('<%= image %>', this)" class="h-16 w-16 border-2 <%= index === 0 ? 'thumbnail-active' : 'border-white' %> rounded-md overflow-hidden shadow-md transition duration-300">
                   <img src="/<%= image %>" alt="Thumbnail" class="w-full h-full object-cover">
                 </button>
               <% }); %>
@@ -32,157 +44,209 @@
         <% } %>
       </div>
       
-      <div class="p-6">
-        <div class="flex flex-col md:flex-row justify-between mb-6">
+      <div class="p-8">
+        <div class="flex flex-col lg:flex-row justify-between mb-8">
           <div>
             <div class="flex items-center mb-2">
               <h1 class="text-3xl font-bold mr-3"><%= vehicle.make %> <%= vehicle.model %></h1>
-              <span class="bg-blue-100 text-blue-800 text-sm font-semibold px-2.5 py-0.5 rounded"><%= vehicle.type.charAt(0).toUpperCase() + vehicle.type.slice(1) %></span>
+              <span class="bg-blue-600 text-white text-sm font-semibold px-3 py-1 rounded-full"><%= vehicle.type.charAt(0).toUpperCase() + vehicle.type.slice(1) %></span>
             </div>
-            <p class="text-gray-600"><%= vehicle.year %> • Listed by <%= vehicle.companyId.name %></p>
+            <p class="text-gray-600 flex items-center">
+              <i class="fas fa-calendar-alt mr-2 text-blue-600"></i>
+              <%= vehicle.year %> • Listed by <%= vehicle.companyId.name %>
+            </p>
           </div>
           
-          <div class="mt-4 md:mt-0">
-            <div class="text-3xl font-bold text-green-600">$<%= vehicle.price %><span class="text-lg font-normal text-gray-600">/day</span></div>
+          <div class="mt-4 lg:mt-0 bg-gray-50 p-4 rounded-lg">
+            <div class="text-3xl font-bold text-blue-600">$<%= vehicle.price %><span class="text-lg font-normal text-gray-600">/day</span></div>
             <div class="mt-2 flex items-center">
-              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium <%= vehicle.isAvailable ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium <%= vehicle.isAvailable ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
+                <i class="<%= vehicle.isAvailable ? 'fas fa-check-circle' : 'fas fa-times-circle' %> mr-1"></i>
                 <%= vehicle.isAvailable ? 'Available' : 'Currently Booked' %>
               </span>
             </div>
           </div>
         </div>
         
-        <div class="border-t border-b py-6 mb-6">
-          <h2 class="text-xl font-bold mb-4">Description</h2>
-          <p class="text-gray-700"><%= vehicle.description %></p>
-        </div>
-        
-        <div class="border-b pb-6 mb-6">
-          <h2 class="text-xl font-bold mb-4">About the Company</h2>
-          <div class="flex items-start">
-            <% if (vehicle.companyId.logo) { %>
-              <img src="/<%= vehicle.companyId.logo %>" alt="<%= vehicle.companyId.name %>" class="w-16 h-16 object-cover rounded-full mr-4">
-            <% } else { %>
-              <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 mr-4">
-                <%= vehicle.companyId.name.charAt(0).toUpperCase() %>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div class="lg:col-span-2">
+            <div class="bg-gray-50 p-6 rounded-xl mb-8">
+              <h2 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-info-circle mr-2 text-blue-600"></i>
+                Vehicle Description
+              </h2>
+              <p class="text-gray-700"><%= vehicle.description %></p>
+            </div>
+            
+            <div class="bg-gray-50 p-6 rounded-xl">
+              <h2 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-building mr-2 text-blue-600"></i>
+                About the Company
+              </h2>
+              <div class="flex items-start">
+                <% if (vehicle.companyId.logo) { %>
+                  <img src="/<%= vehicle.companyId.logo %>" alt="<%= vehicle.companyId.name %>" class="w-16 h-16 object-cover rounded-lg mr-4">
+                <% } else { %>
+                  <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 font-bold mr-4">
+                    <%= vehicle.companyId.name.charAt(0).toUpperCase() %>
+                  </div>
+                <% } %>
+                <div>
+                  <h3 class="font-bold text-lg"><%= vehicle.companyId.name %></h3>
+                  <p class="text-gray-600"><%= vehicle.companyId.address %></p>
+                  <p class="text-gray-700 mt-2"><%= vehicle.companyId.description %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="lg:col-span-1">
+            <% if (isAuthenticated && userVerified && vehicle.isAvailable) { %>
+              <div class="bg-white border border-gray-200 rounded-xl shadow-md overflow-hidden">
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4">
+                  <h2 class="text-xl font-bold text-white">Book This Vehicle</h2>
+                </div>
+                <div class="p-6">
+                  <form action="/book/<%= vehicle._id %>" method="POST">
+                    <div class="space-y-4">
+                      <div>
+                        <label for="pickupLocation" class="block text-gray-700 font-medium mb-2">Pick Up Location</label>
+                        <div class="relative">
+                          <select id="pickupLocation" name="pickupLocation" required class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none">
+                            <% locations.forEach(location => { %>
+                              <option value="<%= location._id %>" <%= selectedPickup === location._id.toString() ? 'selected' : '' %>><%= location.name %></option>
+                            <% }); %>
+                          </select>
+                          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <i class="fas fa-map-marker-alt"></i>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <label for="dropoffLocation" class="block text-gray-700 font-medium mb-2">Drop Off Location</label>
+                        <div class="relative">
+                          <select id="dropoffLocation" name="dropoffLocation" required class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none">
+                            <% locations.forEach(location => { %>
+                              <option value="<%= location._id %>" <%= selectedDropoff === location._id.toString() ? 'selected' : '' %>><%= location.name %></option>
+                            <% }); %>
+                          </select>
+                          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <i class="fas fa-map-marker-alt"></i>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <label for="startDate" class="block text-gray-700 font-medium mb-2">Start Date</label>
+                        <div class="relative">
+                          <input type="date" id="startDate" name="startDate" value="<%= startDate %>" required class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <i class="fas fa-calendar"></i>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <label for="endDate" class="block text-gray-700 font-medium mb-2">End Date</label>
+                        <div class="relative">
+                          <input type="date" id="endDate" name="endDate" value="<%= endDate %>" required class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <i class="fas fa-calendar"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-4 rounded-lg my-6">
+                      <h3 class="font-semibold mb-3 text-gray-800">Price Summary</h3>
+                      <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                          <span>Price per day:</span>
+                          <span>$<%= vehicle.price.toFixed(2) %></span>
+                        </div>
+                        <div class="flex justify-between">
+                          <span>Number of days: <span id="numDays">1</span></span>
+                          <span>$<span id="subtotal"><%= vehicle.price.toFixed(2) %></span></span>
+                        </div>
+                        <div class="flex justify-between">
+                          <span>Tax (18%):</span>
+                          <span>$<span id="tax"><%= (vehicle.price * 0.18).toFixed(2) %></span></span>
+                        </div>
+                        <div class="flex justify-between font-bold pt-2 border-t border-gray-200">
+                          <span>Total:</span>
+                          <span>$<span id="total"><%= (vehicle.price * 1.18).toFixed(2) %></span></span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-3 rounded-lg font-semibold transition duration-300 shadow-md">Proceed to Payment</button>
+                  </form>
+                </div>
+              </div>
+            <% } else if (isAuthenticated && !userVerified) { %>
+              <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg">
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <i class="fas fa-exclamation-triangle text-yellow-400 text-xl"></i>
+                  </div>
+                  <div class="ml-4">
+                    <h3 class="text-lg font-medium text-yellow-800">Verification Required</h3>
+                    <p class="mt-2 text-yellow-700">
+                      You need to verify your account before booking vehicles.
+                    </p>
+                    <div class="mt-4">
+                      <a href="/verification" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+                        Verify Now
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% } else if (!isAuthenticated) { %>
+              <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <i class="fas fa-info-circle text-blue-400 text-xl"></i>
+                  </div>
+                  <div class="ml-4">
+                    <h3 class="text-lg font-medium text-blue-800">Authentication Required</h3>
+                    <p class="mt-2 text-blue-700">
+                      Please login or register to book this vehicle.
+                    </p>
+                    <div class="mt-4 flex space-x-4">
+                      <a href="/login" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Login
+                      </a>
+                      <a href="/register" class="inline-flex items-center px-4 py-2 border border-blue-300 rounded-md shadow-sm text-sm font-medium text-blue-700 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Register
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% } else if (!vehicle.isAvailable) { %>
+              <div class="bg-red-50 border-l-4 border-red-400 p-6 rounded-lg">
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <i class="fas fa-times-circle text-red-400 text-xl"></i>
+                  </div>
+                  <div class="ml-4">
+                    <h3 class="text-lg font-medium text-red-800">Vehicle Unavailable</h3>
+                    <p class="mt-2 text-red-700">
+                      This vehicle is currently booked. Please check back later or browse other available vehicles.
+                    </p>
+                    <div class="mt-4">
+                      <a href="/search" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                        Browse Other Vehicles
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
             <% } %>
-            <div>
-              <h3 class="font-bold text-lg"><%= vehicle.companyId.name %></h3>
-              <p class="text-gray-600"><%= vehicle.companyId.address %></p>
-              <p class="text-gray-700 mt-2"><%= vehicle.companyId.description %></p>
-            </div>
           </div>
         </div>
-        
-        <% if (isAuthenticated && userVerified && vehicle.isAvailable) { %>
-          <div>
-            <h2 class="text-xl font-bold mb-4">Book This Vehicle</h2>
-            <form action="/book/<%= vehicle._id %>" method="POST">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label for="pickupLocation" class="block text-gray-700 font-medium mb-2">Pick Up Location</label>
-                  <select id="pickupLocation" name="pickupLocation" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <% locations.forEach(location => { %>
-                      <option value="<%= location._id %>" <%= selectedPickup === location._id.toString() ? 'selected' : '' %>><%= location.name %></option>
-                    <% }); %>
-                  </select>
-                </div>
-                
-                <div>
-                  <label for="dropoffLocation" class="block text-gray-700 font-medium mb-2">Drop Off Location</label>
-                  <select id="dropoffLocation" name="dropoffLocation" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <% locations.forEach(location => { %>
-                      <option value="<%= location._id %>" <%= selectedDropoff === location._id.toString() ? 'selected' : '' %>><%= location.name %></option>
-                    <% }); %>
-                  </select>
-                </div>
-                
-                <div>
-                  <label for="startDate" class="block text-gray-700 font-medium mb-2">Start Date</label>
-                  <input type="date" id="startDate" name="startDate" value="<%= startDate %>" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                
-                <div>
-                  <label for="endDate" class="block text-gray-700 font-medium mb-2">End Date</label>
-                  <input type="date" id="endDate" name="endDate" value="<%= endDate %>" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-              </div>
-              
-              <div class="bg-gray-50 p-4 rounded-lg mb-4">
-                <h3 class="font-semibold mb-2">Price Summary</h3>
-                <div class="space-y-1 text-sm">
-                  <div class="flex justify-between">
-                    <span>Price per day:</span>
-                    <span>$<%= vehicle.price.toFixed(2) %></span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span>Number of days: <span id="numDays">1</span></span>
-                    <span>$<span id="subtotal"><%= vehicle.price.toFixed(2) %></span></span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span>Tax (18%):</span>
-                    <span>$<span id="tax"><%= (vehicle.price * 0.18).toFixed(2) %></span></span>
-                  </div>
-                  <div class="flex justify-between font-bold pt-1 border-t">
-                    <span>Total:</span>
-                    <span>$<span id="total"><%= (vehicle.price * 1.18).toFixed(2) %></span></span>
-                  </div>
-                </div>
-              </div>
-              
-              <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Proceed to Payment</button>
-            </form>
-          </div>
-        <% } else if (isAuthenticated && !userVerified) { %>
-          <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-            <div class="flex">
-              <div class="flex-shrink-0">
-                <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                </svg>
-              </div>
-              <div class="ml-3">
-                <p class="text-sm text-yellow-700">
-                  You need to verify your account before booking vehicles.
-                  <a href="/verification" class="font-medium underline text-yellow-700 hover:text-yellow-600">
-                    Verify now
-                  </a>
-                </p>
-              </div>
-            </div>
-          </div>
-        <% } else if (!isAuthenticated) { %>
-          <div class="bg-blue-50 border-l-4 border-blue-400 p-4">
-            <div class="flex">
-              <div class="flex-shrink-0">
-                <svg class="h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
-                </svg>
-              </div>
-              <div class="ml-3">
-                <p class="text-sm text-blue-700">
-                  Please <a href="/login" class="font-medium underline text-blue-700 hover:text-blue-600">login</a> or <a href="/register" class="font-medium underline text-blue-700 hover:text-blue-600">register</a> to book this vehicle.
-                </p>
-              </div>
-            </div>
-          </div>
-        <% } else if (!vehicle.isAvailable) { %>
-          <div class="bg-red-50 border-l-4 border-red-400 p-4">
-            <div class="flex">
-              <div class="flex-shrink-0">
-                <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-                </svg>
-              </div>
-              <div class="ml-3">
-                <p class="text-sm text-red-700">
-                  This vehicle is currently booked. Please check back later or browse other available vehicles.
-                </p>
-              </div>
-            </div>
-          </div>
-        <% } %>
       </div>
     </div>
   </main>
@@ -195,13 +259,13 @@
       
       // Update border for all thumbnails
       document.querySelectorAll('[onclick^="changeImage"]').forEach(btn => {
-        btn.classList.remove('border-blue-500');
+        btn.classList.remove('thumbnail-active');
         btn.classList.add('border-white');
       });
       
       // Add border to selected thumbnail
       element.classList.remove('border-white');
-      element.classList.add('border-blue-500');
+      element.classList.add('thumbnail-active');
     }
     
     // Set minimum dates for booking
