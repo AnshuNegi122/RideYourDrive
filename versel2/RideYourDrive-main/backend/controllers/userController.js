@@ -122,3 +122,85 @@ export const updateUserProfile = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+
+// controllers/userController.js - Add these functions
+
+// @desc    Verify a user
+// @route   POST /api/users/verify
+// @access  Private
+export const verifyUser = async (req, res) => {
+  try {
+    const {
+      firstName,
+      lastName,
+      driverLicense,
+      panCard,
+      city,
+      state,
+      zipCode
+    } = req.body;
+
+    // Validate required fields
+    if (!firstName || !lastName || !driverLicense || !panCard || !city || !state || !zipCode) {
+      return res.status(400).json({ message: 'Please provide all required fields' });
+    }
+
+    // Find user
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Update user with verification details
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.driverLicense = driverLicense;
+    user.panCard = panCard;
+    user.city = city;
+    user.state = state;
+    user.zipCode = zipCode;
+    user.isVerified = true;
+    user.verificationDate = Date.now();
+
+    await user.save();
+
+    res.status(200).json({
+      message: 'User verified successfully',
+      isVerified: true
+    });
+  } catch (error) {
+    console.error('Error in verifyUser:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// @desc    Get user verification status
+// @route   GET /api/users/verification-status
+// @access  Private
+export const getVerificationStatus = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({
+      isVerified: user.isVerified,
+      verificationData: user.isVerified ? {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        driverLicense: user.driverLicense,
+        panCard: user.panCard,
+        city: user.city,
+        state: user.state,
+        zipCode: user.zipCode,
+        verificationDate: user.verificationDate
+      } : null
+    });
+  } catch (error) {
+    console.error('Error in getVerificationStatus:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};

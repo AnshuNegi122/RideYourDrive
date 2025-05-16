@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verification - Vehicle Rental</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <%- include('partials/header') %>
+  
+  <main class="container mx-auto px-4 py-12">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-8">
+      <h1 class="text-2xl font-bold text-center mb-6">Account Verification</h1>
+      
+      <% if (verification && verification.isVerified) { %>
+        <div class="bg-green-50 border-l-4 border-green-400 p-4 mb-6">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm text-green-700">
+                Your account is verified. You can now book vehicles.
+              </p>
+            </div>
+          </div>
+        </div>
+      <% } else if (verification && verification.status === 'pending') { %>
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm text-yellow-700">
+                Your verification is pending. We'll review your documents shortly.
+              </p>
+            </div>
+          </div>
+        </div>
+      <% } else if (verification && verification.status === 'rejected') { %>
+        <div class="bg-red-50 border-l-4 border-red-400 p-4 mb-6">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm text-red-700">
+                Your verification was rejected. Please upload clear and valid documents.
+              </p>
+            </div>
+          </div>
+        </div>
+      <% } %>
+      
+      <div class="mb-6">
+        <h2 class="text-lg font-semibold mb-2">Verification Requirements</h2>
+        <p class="text-gray-600 mb-4">To rent vehicles, we need to verify your identity and driving eligibility. Please upload the following documents:</p>
+        
+        <ul class="list-disc list-inside space-y-2 text-gray-700">
+          <li>Valid Driving License (front and back in one image)</li>
+          <li>PAN Card</li>
+        </ul>
+      </div>
+      
+      <form action="/verification" method="POST" enctype="multipart/form-data">
+        <div class="mb-4">
+          <label for="drivingLicense" class="block text-gray-700 font-medium mb-2">Driving License</label>
+          <input type="file" id="drivingLicense" name="drivingLicense" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <p class="text-sm text-gray-500 mt-1">Upload a clear image of your driving license</p>
+        </div>
+        
+        <div class="mb-6">
+          <label for="panCard" class="block text-gray-700 font-medium mb-2">PAN Card</label>
+          <input type="file" id="panCard" name="panCard" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <p class="text-sm text-gray-500 mt-1">Upload a clear image of your PAN card</p>
+        </div>
+        
+        <div class="flex justify-between">
+          <a href="/dashboard" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded">Back to Dashboard</a>
+          <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Submit for Verification</button>
+        </div>
+      </form>
+    </div>
+  </main>
+  
+  <%- include('partials/footer') %>
+</body>
+</html>

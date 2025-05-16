@@ -1065,7 +1065,9 @@
 
 
   <!-- Modal Background (Initially Hidden) -->
-  <div id="modal" class="fixed inset-0 bg-gray-300 bg-opacity-50 flex justify-center items-center z-50 hidden">
+  <!-- Add this to your index.html if not already present -->
+  <div id="verification-modal"
+    class="fixed inset-0 bg-gray-300 bg-opacity-50 flex justify-center items-center z-50 hidden">
     <!-- Modal Container -->
     <div class="bg-gray-700 rounded-lg shadow-lg px-16 py-8 relative" style="max-width: 550px; max-height: 590px;">
       <!-- Close Button -->
@@ -1086,7 +1088,6 @@
             <input
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-name" type="text" placeholder="Jane">
-
           </div>
           <div class="w-full md:w-1/2 px-3">
             <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="grid-last-name">
@@ -1104,7 +1105,7 @@
             </label>
             <input
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-driving-license" type="text" placeholder="Enter Driving License">
+              id="driver-license" type="text" placeholder="Enter Driving License">
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-3">
@@ -1114,7 +1115,7 @@
             </label>
             <input
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-pan-card" type="text" placeholder="Enter Pan Card">
+              id="pan-card" type="text" placeholder="Enter Pan Card">
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-3">
@@ -1154,27 +1155,28 @@
               id="grid-zip" type="text" placeholder="90210">
           </div>
         </div>
+
         <!-- Verify Button -->
-      <div class="flex justify-between mt-6">
-        <button
-          class="closeModalBtn w-full m-3 p-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
-          Close
-        </button>
-        <button type="submit"
-          class="w-full m-3 p-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-          Verify
-        </button>
+        <div class="flex justify-between mt-6">
+          <button
+            class="closeModalBtn w-full m-3 p-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+            Close
+          </button>
+          <button type="submit"
+            class="w-full m-3 p-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            Verify
+          </button>
+        </div>
       </form>
-      </div>
     </div>
   </div>
 
   <!-- Add these at the end of your index.html file, before the closing body tag -->
-<script src="js/verification.js"></script>
-<script src="js/booking-modal.js"></script>
-<script src="js/booking-summary.js"></script>
-<script src="js/index-integration.js"></script>
-  
+  <script src="js/verification.js"></script>
+  <script src="js/booking-modal.js"></script>
+  <script src="js/booking-summary.js"></script>
+  <script src="js/index-integration.js"></script>
+
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {

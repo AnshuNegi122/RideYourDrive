@@ -64,11 +64,11 @@ const carSchema = new mongoose.Schema({
     required: [true, 'Insurance policy number is required']
   },
   policyStartDate: {
-    type: Date,
+    type: String,
     required: [true, 'Policy start date is required']
   },
   policyEndDate: {
-    type: Date,
+    type: String,
     required: [true, 'Policy end date is required']
   },
   images: [String],

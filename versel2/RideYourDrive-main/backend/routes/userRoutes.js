@@ -3,7 +3,9 @@ import {
   registerUser,
   loginUser,
   getUserProfile,
-  updateUserProfile
+  updateUserProfile,
+  verifyUser,
+  getVerificationStatus
 } from '../controllers/userController.js';
 import { protect } from '../middleware/authMiddleware.js';
 import User from '../models/userModel.js';
@@ -24,40 +26,40 @@ router.route('/profile')
 // @desc    Verify user for car booking
 // @route   POST /api/users/verify
 // @access  Private
-router.post("/verify", protect, async (req, res) => {
-  try {
-    const { firstName, lastName, driverLicense, panCard, city, state, zipCode } = req.body;
+// router.post("/verify", protect, async (req, res) => {
+//   try {
+//     const { firstName, lastName, driverLicense, panCard, city, state, zipCode } = req.body;
 
-    if (!firstName || !lastName || !driverLicense || !panCard || !city || !state || !zipCode) {
-      return res.status(400).json({ message: "Please provide all required fields" });
-    }
+//     if (!firstName || !lastName || !driverLicense || !panCard || !city || !state || !zipCode) {
+//       return res.status(400).json({ message: "Please provide all required fields" });
+//     }
 
-    const user = await User.findById(req.user._id);
+//     const user = await User.findById(req.user._id);
 
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
 
-    user.firstName = firstName;
-    user.lastName = lastName;
-    user.driverLicense = driverLicense;
-    user.panCard = panCard;
-    user.city = city;
-    user.state = state;
-    user.zipCode = zipCode;
-    user.isVerified = true;
+//     user.firstName = firstName;
+//     user.lastName = lastName;
+//     user.driverLicense = driverLicense;
+//     user.panCard = panCard;
+//     user.city = city;
+//     user.state = state;
+//     user.zipCode = zipCode;
+//     user.isVerified = true;
 
-    await user.save();
+//     await user.save();
 
-    res.status(200).json({
-      message: "User verified successfully",
-      isVerified: true,
-    });
-  } catch (error) {
-    console.error("Error in user verification:", error);
-    res.status(500).json({ message: "Server error during verification" });
-  }
-});
+//     res.status(200).json({
+//       message: "User verified successfully",
+//       isVerified: true,
+//     });
+//   } catch (error) {
+//     console.error("Error in user verification:", error);
+//     res.status(500).json({ message: "Server error during verification" });
+//   }
+// });
 
 // @desc    Check if user is verified
 // @route   GET /api/users/verify
@@ -89,5 +91,12 @@ router.get("/verify", protect, async (req, res) => {
     res.status(500).json({ message: "Server error checking verification status" });
   }
 });
+
+
+// Verify user
+router.post('/verify', protect, verifyUser);
+
+// Check verification status
+router.get('/verification-status', protect, getVerificationStatus);
 
 export default router;

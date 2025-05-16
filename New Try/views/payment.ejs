@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment - Vehicle Rental</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <%- include('partials/header') %>
+  
+  <main class="container mx-auto px-4 py-12">
+    <div class="max-w-3xl mx-auto">
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="bg-blue-600 px-6 py-4">
+          <h1 class="text-2xl font-bold text-white">Complete Your Booking</h1>
+        </div>
+        
+        <div class="p-6">
+          <!-- Booking Summary -->
+          <div class="mb-8">
+            <h2 class="text-xl font-bold mb-4">Booking Summary</h2>
+            <div class="bg-gray-50 rounded-lg p-4">
+              <div class="flex items-center mb-4">
+                <div class="h-16 w-16 bg-gray-200 rounded-md overflow-hidden mr-4">
+                  <% if (vehicle.images && vehicle.images.length > 0) { %>
+                    <img src="/<%= vehicle.images[0] %>" alt="<%= vehicle.make %> <%= vehicle.model %>" class="h-full w-full object-cover">
+                  <% } %>
+                </div>
+                <div>
+                  <h3 class="font-bold"><%= vehicle.make %> <%= vehicle.model %></h3>
+                  <p class="text-gray-600"><%= vehicle.year %> • <%= vehicle.type.charAt(0).toUpperCase() + vehicle.type.slice(1) %></p>
+                </div>
+              </div>
+              
+              <div class="border-t border-gray-200 pt-4">
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <p class="text-gray-600">Pick-up Location</p>
+                    <p class="font-semibold"><%= pickupLocation %></p>
+                  </div>
+                  <div>
+                    <p class="text-gray-600">Drop-off Location</p>
+                    <p class="font-semibold"><%= dropoffLocation %></p>
+                  </div>
+                  <div>
+                    <p class="text-gray-600">Pick-up Date</p>
+                    <p class="font-semibold"><%= new Date(startDate).toLocaleDateString() %></p>
+                  </div>
+                  <div>
+                    <p class="text-gray-600">Return Date</p>
+                    <p class="font-semibold"><%= new Date(endDate).toLocaleDateString() %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Price Breakdown -->
+          <div class="mb-8">
+            <h2 class="text-xl font-bold mb-4">Price Breakdown</h2>
+            <div class="bg-gray-50 rounded-lg p-4">
+              <div class="space-y-2 mb-4">
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Rental Period</span>
+                  <span class="font-semibold"><%= days %> days</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Price per Day</span>
+                  <span class="font-semibold">$<%= vehicle.price.toFixed(2) %></span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Subtotal</span>
+                  <span class="font-semibold">$<%= subtotal.toFixed(2) %></span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Tax (18%)</span>
+                  <span class="font-semibold">$<%= tax.toFixed(2) %></span>
+                </div>
+              </div>
+              <div class="border-t border-gray-200 pt-4">
+                <div class="flex justify-between text-lg font-bold">
+                  <span>Total</span>
+                  <span>$<%= total.toFixed(2) %></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Payment Form -->
+          <div>
+            <h2 class="text-xl font-bold mb-4">Payment Details</h2>
+            <form action="/payment/process" method="POST">
+              <input type="hidden" name="bookingId" value="<%= bookingId %>">
+              <input type="hidden" name="amount" value="<%= subtotal %>">
+              <input type="hidden" name="tax" value="<%= tax %>">
+              <input type="hidden" name="total" value="<%= total %>">
+              
+              <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-2">Payment Method</label>
+                <div class="grid grid-cols-3 gap-4">
+                  <div class="border rounded-lg p-4 cursor-pointer hover:border-blue-500 hover:bg-blue-50" onclick="selectPaymentMethod('credit_card', this)">
+                    <input type="radio" id="credit_card" name="paymentMethod" value="credit_card" class="hidden" required>
+                    <div class="text-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                      </svg>
+                      <h3 class="font-semibold">Credit Card</h3>
+                    </div>
+                  </div>
+                  
+                  <div class="border rounded-lg p-4 cursor-pointer hover:border-blue-500 hover:bg-blue-50" onclick="selectPaymentMethod('paypal', this)">
+                    <input type="radio" id="paypal" name="paymentMethod" value="paypal" class="hidden">
+                    <div class="text-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                      </svg>
+                      <h3 class="font-semibold">PayPal</h3>
+                    </div>
+                  </div>
+                  
+                  <div class="border rounded-lg p-4 cursor-pointer hover:border-blue-500 hover:bg-blue-50" onclick="selectPaymentMethod('bank_transfer', this)">
+                    <input type="radio" id="bank_transfer" name="paymentMethod" value="bank_transfer" class="hidden">
+                    <div class="text-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                      </svg>
+                      <h3 class="font-semibold">Bank Transfer</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div id="credit_card_form" class="mb-6 payment-form">
+                <div class="mb-4">
+                  <label for="card_number" class="block text-gray-700 font-medium mb-2">Card Number</label>
+                  <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label for="expiry_date" class="block text-gray-700 font-medium mb-2">Expiry Date</label>
+                    <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  </div>
+                  <div>
+                    <label for="cvv" class="block text-gray-700 font-medium mb-2">CVV</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="123" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  </div>
+                </div>
+                
+                <div>
+                  <label for="card_name" class="block text-gray-700 font-medium mb-2">Name on Card</label>
+                  <input type="text" id="card_name" name="card_name" placeholder="John Doe" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+              </div>
+              
+              <div id="paypal_form" class="mb-6 payment-form hidden">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                  <p class="text-blue-800">You will be redirected to PayPal to complete your payment after clicking "Pay Now".</p>
+                </div>
+              </div>
+              
+              <div id="bank_transfer_form" class="mb-6 payment-form hidden">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                  <p class="text-blue-800 mb-2">Please transfer the total amount to the following bank account:</p>
+                  <div class="space-y-1 text-sm">
+                    <p><span class="font-semibold">Bank Name:</span> Example Bank</p>
+                    <p><span class="font-semibold">Account Name:</span> Vehicle Rental Inc.</p>
+                    <p><span class="font-semibold">Account Number:</span> 1234567890</p>
+                    <p><span class="font-semibold">IFSC Code:</span> EXBK0001234</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="flex items-center mb-6">
+                <input type="checkbox" id="terms" name="terms" required class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                <label for="terms" class="ml-2 block text-sm text-gray-700">
+                  I agree to the <a href="#" class="text-blue-600 hover:underline">Terms and Conditions</a> and <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a>
+                </label>
+              </div>
+              
+              <div class="flex justify-between">
+                <a href="/dashboard" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-6 rounded-lg font-semibold">Cancel</a>
+                <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded-lg font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Pay Now</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <%- include('partials/footer') %>
+  
+  <script>
+    function selectPaymentMethod(method, element) {
+      // Reset all
+      document.querySelectorAll('[name="paymentMethod"]').forEach(radio => {
+        radio.checked = false;
+        radio.parentElement.classList.remove('border-blue-500', 'bg-blue-50');
+      });
+      
+      // Select the clicked one
+      document.getElementById(method).checked = true;
+      element.classList.add('border-blue-500', 'bg-blue-50');
+      
+      // Show/hide appropriate form
+      document.querySelectorAll('.payment-form').forEach(form => {
+        form.classList.add('hidden');
+      });
+      document.getElementById(method + '_form').classList.remove('hidden');
+    }
+    
+    // Select credit card by default
+    window.onload = function() {
+      const creditCardOption = document.querySelector('[onclick="selectPaymentMethod(\'credit_card\', this)"]');
+      if (creditCardOption) {
+        selectPaymentMethod('credit_card', creditCardOption);
+      }
+    };
+  </script>
+</body>
+</html>
